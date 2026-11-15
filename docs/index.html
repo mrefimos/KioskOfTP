@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Интерактивная карта | Технопарк «Альтаир»</title>
+<title>Интерактивная карта | Детский технопарк «Альтаир»</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -2099,7 +2099,8 @@ document.addEventListener('DOMContentLoaded', () => {
       isPanning = true;
       panStartX = e.clientX; panStartY = e.clientY;
       panStartStateX = state.panX; panStartStateY = state.panY;
-      container.setPointerCapture(e.pointerId);
+      //container.setPointerCapture(e.pointerId);
+      if (e.pointerType === 'mouse') container.setPointerCapture(e.pointerId);
       svg.classList.add('panning');
     } else if (activePointers.size === 2) {
       isPanning = false;
@@ -2117,10 +2118,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const dx = e.clientX - panStartX;
       const dy = e.clientY - panStartY;
 
-      if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+    if (Math.abs(dx) > 15 || Math.abs(dy) > 15) {
         hasDragged = true;
         poiTooltip.classList.remove('show');
-      }
+    }
 
       const rect = svg.getBoundingClientRect();
       const baseVB = getBounds()[state.floor];
@@ -2139,11 +2140,18 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const endPointer = (e) => {
-    activePointers.delete(e.pointerId);
-    if (activePointers.size === 0) {
-      isPanning = false;
-      svg.classList.remove('panning');
-    }
+      activePointers.delete(e.pointerId);
+      if (activePointers.size === 0) {
+        isPanning = false;
+        svg.classList.remove('panning');
+
+        // Если указатель сдвинулся меньше чем на 15 пикселей — это был клик, а не драг!
+        const dx = e.clientX - panStartX;
+        const dy = e.clientY - panStartY;
+        if (Math.abs(dx) < 15 && Math.abs(dy) < 15) {
+            hasDragged = false;
+        }
+      }
   };
   container.addEventListener('pointerup', endPointer);
   container.addEventListener('pointercancel', endPointer);
