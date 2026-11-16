@@ -87,18 +87,100 @@
   .drag-handle { display: none; width: 40px; height: 5px; background: #d1d1d6; border-radius: 3px; margin: 10px auto 0 auto; }
 
   @media (max-width: 768px) {
+    /* Модальное окно (шторка) */
     .modal { position: fixed; bottom: 0; width: 100%; max-width: 100%; border-radius: 24px 24px 0 0; transform: translateY(100%); max-height: 90vh; }
     .modal-overlay.active .modal { transform: translateY(0); }
     .drag-handle { display: block; }
     .modal-header { padding: 15px 20px; }
     .tabs { padding: 0 20px; }
     .tab-content { padding: 20px; }
-    .search-input.open { width: 220px; }
-    .bottom-left { bottom: 20px; left: 20px; }
-    .bottom-right { bottom: 20px; right: 20px; }
-    .segmented-control { width: 140px; }
-    .zoom-controls button { width: 36px; height: 36px; }
-    .fab-btn { width: 48px; height: 48px; font-size: 20px; }
+    
+    /* Шапка */
+    header {
+      padding: 10px 16px;
+      gap: 10px;
+    }
+    .logo {
+      font-size: 13px; /* Уменьшаем кегль */
+      line-height: 1.3;
+      flex: 1; /* Логотип занимает свободное место */
+      padding: 8px 12px;
+      text-align: center;
+    }
+    .clock-widget {
+      flex-direction: column; /* Дата и время в столбик */
+      align-items: flex-end;
+      padding: 6px 14px;
+      font-size: 13px;
+      gap: 2px;
+    }
+    .clock-separator {
+      display: none; /* Убираем разделитель | */
+    }
+    .clock-date {
+      font-size: 11px; /* Чуть меньше дата */
+    }
+    .clock-time {
+      font-size: 15px; /* Чуть больше время */
+    }
+
+    /* Скрываем кнопку "Оба" */
+    .btn-both {
+      display: none;
+    }
+
+    /* Нижняя левая панель в колонку */
+    .bottom-left {
+      bottom: 20px;
+      left: 20px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    /* Задаем одинаковую ширину для блока этажей и зума */
+    .bottom-left .ui-pill {
+      width: 150px;
+      box-sizing: border-box;
+      padding: 4px;
+      justify-content: center;
+    }
+
+    .segmented-control {
+      width: 100%;
+      padding: 2px;
+      margin: 0;
+    }
+    .segmented-btn {
+      padding: 6px 0;
+      font-size: 13px;
+    }
+
+    .zoom-controls {
+      width: 150px;
+      box-sizing: border-box;
+      justify-content: space-between;
+      padding: 4px;
+    }
+    .zoom-controls button {
+      width: 36px;
+      height: 36px;
+      font-size: 16px;
+    }
+
+    /* Правый нижний угол (поиск и легенда) */
+    .bottom-right {
+      bottom: 20px;
+      right: 20px;
+    }
+    .fab-btn {
+      width: 48px;
+      height: 48px;
+    }
+    .search-input.open {
+      width: 180px; /* Немного уменьшаем для узких экранов */
+      padding: 12px 16px;
+    }
   }
 
   .modal-header { padding: 24px 32px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-start; position: relative; }
