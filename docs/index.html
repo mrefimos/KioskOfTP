@@ -94,36 +94,36 @@
     .modal-header { padding: 15px 20px; }
     .tabs { padding: 0 20px; }
     .tab-content { padding: 20px; }
-    
-    /* Шапка */
+
+    /* --- ОБНОВЛЕННАЯ ШАПКА --- */
     header {
-      padding: 10px 16px;
-      gap: 10px;
-    }
-    .logo {
-      font-size: 13px; /* Уменьшаем кегль */
-      line-height: 1.3;
-      flex: 1; /* Логотип занимает свободное место */
-      padding: 8px 12px;
-      text-align: center;
-    }
-    .clock-widget {
-      flex-direction: column; /* Дата и время в столбик */
-      align-items: flex-end;
-      padding: 6px 14px;
-      font-size: 13px;
-      gap: 2px;
-    }
-    .clock-separator {
-      display: none; /* Убираем разделитель | */
-    }
-    .clock-date {
-      font-size: 11px; /* Чуть меньше дата */
-    }
-    .clock-time {
-      font-size: 15px; /* Чуть больше время */
+      padding: 12px 16px;
+      flex-direction: column; /* Выстраиваем элементы в колонку */
+      align-items: flex-start; /* Прижимаем к левому краю */
+      gap: 8px; /* Отступ между логотипом и часами */
     }
 
+    .logo {
+      font-size: 14px; /* Уменьшаем шрифт, чтобы влезло */
+      padding: 8px 16px;
+      white-space: nowrap; /* Запрещаем перенос строк */
+    }
+
+    .clock-widget {
+      font-size: 14px;
+      padding: 8px 16px;
+      flex-direction: row; /* Дата и время строго в одну строку */
+      align-items: center;
+      white-space: nowrap; /* Запрещаем перенос строк */
+    }
+
+    .clock-separator {
+      display: inline; /* Возвращаем разделитель */
+      opacity: 0.6;
+      margin: 0 4px;
+    }
+
+    /* --- НИЖНЯЯ ПАНЕЛЬ --- */
     /* Скрываем кнопку "Оба" */
     .btn-both {
       display: none;
@@ -138,12 +138,13 @@
       gap: 10px;
     }
 
-    /* Задаем одинаковую ширину для блока этажей и зума */
-    .bottom-left .ui-pill {
+    /* Одинаковая ширина для блока этажей и зума */
+    .bottom-left .ui-pill,
+    .zoom-controls {
       width: 150px;
       box-sizing: border-box;
-      padding: 4px;
       justify-content: center;
+      padding: 4px;
     }
 
     .segmented-control {
@@ -157,10 +158,7 @@
     }
 
     .zoom-controls {
-      width: 150px;
-      box-sizing: border-box;
       justify-content: space-between;
-      padding: 4px;
     }
     .zoom-controls button {
       width: 36px;
@@ -178,8 +176,24 @@
       height: 48px;
     }
     .search-input.open {
-      width: 180px; /* Немного уменьшаем для узких экранов */
+      width: 180px;
       padding: 12px 16px;
+    }
+    
+    /* ФИКС ШАПКИ И СКРОЛЛА */
+    .modal-header, 
+    .tabs {
+      flex-shrink: 0; /* Запрещаем шапке и вкладкам сжиматься или уезжать вверх */
+    }
+
+    .tab-content {
+      min-height: 0; /* Важно для флексбокса, чтобы внутренний скролл работал правильно */
+      -webkit-overflow-scrolling: touch; /* Плавный скролл на iOS */
+    }
+
+    /* Немного уменьшаем максимальную высоту для мобилок, чтобы точно влезало */
+    .modal {
+      max-height: 85dvh !important; /* dvh учитывает адресную строку браузера */
     }
   }
 
