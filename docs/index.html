@@ -30,49 +30,51 @@
   [id="Rectangle 132"] { display: none !important; }
 
   /* Шапка */
-  header { position: absolute; top: 0; left: 0; right: 0; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; z-index: 10; pointer-events: none; }
+  header { position: absolute; top: 0; left: 0; right: 0; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; z-index: 10; pointer-events: none; }
   header > * { pointer-events: auto; }
 
-  .logo { font-size: 20px; font-weight: 700; color: var(--primary); background: rgba(255,255,255,0.95); padding: 10px 16px; border-radius: var(--radius); box-shadow: var(--shadow); }
-  @media (max-width: 768px) { .logo { display: none; } }
+  .logo { font-size: 16px; font-weight: 700; color: #FFFFFF; background: var(--primary); padding: 10px 20px; border-radius: 30px; box-shadow: var(--shadow); }
 
-  /* iOS Segmented Control */
-  .floor-controls-wrapper { display: flex; gap: 12px; margin: 0 auto; }
-
-  .segmented-control { position: relative; display: flex; background: #E5E5EA; border-radius: 30px; padding: 3px; width: 200px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); }
-  .segmented-slider { position: absolute; top: 3px; left: 3px; width: calc(50% - 3px); height: calc(100% - 6px); background: white; border-radius: 27px; box-shadow: 0 2px 5px rgba(0,0,0,0.15); transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1); }
-  .segmented-btn { flex: 1; position: relative; z-index: 1; background: transparent; border: none; font-size: 14px; font-weight: 600; color: #8e8e93; cursor: pointer; padding: 8px 0; border-radius: 30px; transition: color 0.2s; }
-  .segmented-btn.active { color: #1a1a1a; }
-  .segmented-control[data-active="f2"] .segmented-slider { transform: translateX(100%); }
-
-  .btn-both { background: var(--surface); border: 1px solid var(--border); padding: 8px 16px; border-radius: 30px; font-size: 13px; font-weight: 600; color: var(--text-muted); cursor: pointer; box-shadow: var(--shadow); transition: all 0.2s; }
-  .btn-both:hover, .btn-both.active { background: var(--primary); color: white; border-color: var(--primary); }
-  @media (max-width: 600px) { .btn-both { display: none; } }
-
-  .btn-legend { background: var(--surface); border: none; width: 44px; height: 44px; border-radius: 50%; font-size: 18px; font-weight: bold; color: var(--primary); cursor: pointer; box-shadow: var(--shadow); display: flex; align-items: center; justify-content: center; }
+  .clock-widget { background: var(--primary); color: #FFFFFF; padding: 10px 20px; border-radius: 30px; box-shadow: var(--shadow); display: flex; align-items: center; gap: 6px; font-size: 16px; }
+  .clock-date { font-weight: 300; } /* Тонкий шрифт */
+  .clock-separator { font-weight: 300; opacity: 0.6; margin: 0 4px; }
+  .clock-time { font-weight: 700; font-variant-numeric: tabular-nums; } /* Жирный шрифт */
 
   /* Карта */
   .map-container { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; touch-action: none; overflow: hidden; background: var(--bg); }
   .map-container svg { width: 100%; height: 100%; max-width: 100%; max-height: 100%; display: block; cursor: grab; }
   .map-container svg.panning { cursor: grabbing; }
 
-  /* Панель зума */
-  .zoom-panel { position: absolute; bottom: 24px; left: 24px; display: flex; flex-direction: column; gap: 8px; background: var(--surface); padding: 6px; border-radius: 12px; box-shadow: var(--shadow); z-index: 10; }
-  .zoom-panel button { width: 44px; height: 44px; border: none; background: transparent; font-size: 20px; font-weight: 600; color: var(--text); border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
-  .zoom-panel button:hover { background: #f0f0f0; }
-  .zoom-panel button.reset { font-size: 13px; font-weight: 700; }
+  /* Нижние панели управления */
+  .bottom-left, .bottom-right { position: absolute; bottom: 24px; display: flex; gap: 12px; z-index: 10; }
+  .bottom-left { left: 24px; flex-direction: row; align-items: center; }
+  .bottom-right { right: 24px; flex-direction: row; align-items: center; justify-content: flex-end; }
 
-  /* Поиск */
-  .search-fab-container { position: absolute; bottom: 24px; right: 24px; z-index: 10; display: flex; align-items: center; justify-content: flex-end; }
-  .search-input { width: 0; opacity: 0; padding: 0; border: none; border-radius: 30px; font-size: 16px; background: var(--surface); box-shadow: var(--shadow); transition: all 0.3s ease; pointer-events: none; outline: none; font-family: inherit; }
+  /* Общий стиль "капсул" */
+  .ui-pill { background: var(--surface); border-radius: 40px; box-shadow: var(--shadow); display: flex; align-items: center; padding: 6px; }
+
+  /* Тумблер этажей */
+  .segmented-control { position: relative; display: flex; background: #E5E5EA; border-radius: 30px; padding: 4px; width: 180px; }
+  .segmented-slider { position: absolute; top: 4px; left: 4px; width: calc(50% - 4px); height: calc(100% - 8px); background: white; border-radius: 26px; box-shadow: 0 2px 5px rgba(0,0,0,0.15); transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1); }
+  .segmented-btn { flex: 1; position: relative; z-index: 1; background: transparent; border: none; font-size: 14px; font-weight: 600; color: #8e8e93; cursor: pointer; padding: 8px 0; border-radius: 30px; transition: color 0.2s; }
+  .segmented-btn.active { color: #1a1a1a; }
+  .segmented-control[data-active="f2"] .segmented-slider { transform: translateX(100%); }
+
+  .btn-both { background: transparent; border: none; padding: 8px 16px; font-size: 14px; font-weight: 600; color: var(--text-muted); cursor: pointer; border-radius: 20px; transition: all 0.2s; margin-left: 6px; }
+  .btn-both:hover, .btn-both.active { background: var(--primary); color: white; }
+
+  /* Кнопки зума */
+  .zoom-controls { display: flex; gap: 4px; background: var(--surface); padding: 6px; border-radius: 40px; box-shadow: var(--shadow); }
+  .zoom-controls button { width: 40px; height: 40px; border: none; background: transparent; font-size: 18px; font-weight: 600; color: var(--text); border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+  .zoom-controls button:hover { background: #f0f0f0; }
+  .zoom-controls button.reset { font-size: 12px; font-weight: 700; }
+
+  /* Кнопки Поиска и Легенды */
+  .fab-btn { width: 56px; height: 56px; border-radius: 50%; background: var(--primary); color: white; border: none; cursor: pointer; box-shadow: var(--shadow); display: flex; align-items: center; justify-content: center; transition: transform 0.2s; flex-shrink: 0; font-size: 24px; font-weight: bold; }
+  .fab-btn:hover { transform: scale(1.05); }
+  .fab-btn svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+  .search-input { width: 0; opacity: 0; padding: 0; border: none; border-radius: 30px; font-size: 16px; background: var(--surface); box-shadow: var(--shadow); transition: all 0.3s ease; pointer-events: none; outline: none; font-family: inherit; margin-right: 0; }
   .search-input.open { width: 320px; opacity: 1; padding: 14px 20px; margin-right: 12px; pointer-events: auto; }
-
-  .search-fab { width: 56px; height: 56px; border-radius: 50%; background: var(--primary); color: white; border: none; cursor: pointer; box-shadow: var(--shadow); display: flex; align-items: center; justify-content: center; transition: transform 0.2s; flex-shrink: 0; }
-  .search-fab:hover { transform: scale(1.05); }
-  .search-fab svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-
-  .open-card-btn { position: absolute; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--primary); color: white; border: none; padding: 16px 32px; border-radius: 30px; font-size: 16px; font-weight: 600; box-shadow: var(--shadow); cursor: pointer; opacity: 0; pointer-events: none; transition: all 0.3s; z-index: 10; }
-  .open-card-btn.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
 
   /* Модальные окна */
   .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); display: flex; justify-content: center; align-items: center; z-index: 100; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
@@ -81,98 +83,97 @@
   .modal { background: var(--surface); width: 90%; max-width: 800px; border-radius: 24px; box-shadow: 0 24px 48px rgba(0,0,0,0.2); transform: translateY(20px); transition: transform 0.3s; display: flex; flex-direction: column; max-height: 90vh; overflow: hidden; }
   .modal-overlay.active .modal { transform: translateY(0); }
 
+  /* Свайп-хэндл для мобилок */
+  .drag-handle { display: none; width: 40px; height: 5px; background: #d1d1d6; border-radius: 3px; margin: 10px auto 0 auto; }
+
   @media (max-width: 768px) {
-    .modal { position: fixed; bottom: 0; width: 100%; max-width: 100%; border-radius: 24px 24px 0 0; transform: translateY(100%); max-height: 85vh; }
+    .modal { position: fixed; bottom: 0; width: 100%; max-width: 100%; border-radius: 24px 24px 0 0; transform: translateY(100%); max-height: 90vh; }
     .modal-overlay.active .modal { transform: translateY(0); }
-    .modal-header { padding: 20px; }
+    .drag-handle { display: block; }
+    .modal-header { padding: 15px 20px; }
     .tabs { padding: 0 20px; }
     .tab-content { padding: 20px; }
-    .search-input.open { width: 260px; }
+    .search-input.open { width: 220px; }
+    .bottom-left { bottom: 20px; left: 20px; }
+    .bottom-right { bottom: 20px; right: 20px; }
+    .segmented-control { width: 140px; }
+    .zoom-controls button { width: 36px; height: 36px; }
+    .fab-btn { width: 48px; height: 48px; font-size: 20px; }
   }
 
-  .modal-header { padding: 24px 32px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-start; }
+  .modal-header { padding: 24px 32px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-start; position: relative; }
   .modal-title { font-size: 28px; font-weight: 700; color: var(--primary); margin: 0; }
   .modal-subtitle { font-size: 16px; color: var(--text-muted); margin-top: 4px; }
 
-  .status-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; background: #ECFDF5; color: var(--status-free); margin-top: 12px; }
+  .status-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 20px; font-size: 14px; font-weight: 600; background: #ECFDF5; color: var(--status-free); margin-top: 12px; }
   .status-badge.busy { background: #FEF2F2; color: var(--status-busy); }
   .status-dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
 
-  .close-btn { background: #f0f0f0; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 20px; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .close-btn { background: #f0f0f0; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 20px; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 
   .tabs { display: flex; padding: 0 32px; border-bottom: 1px solid var(--border); gap: 24px; }
   .tab-btn { padding: 16px 0; font-size: 16px; font-weight: 600; color: var(--text-muted); background: transparent; border: none; border-bottom: 3px solid transparent; cursor: pointer; transition: all 0.2s; }
   .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
 
-  .tab-content { padding: 32px; overflow-y: auto; flex: 1; display: none; }
+  .tab-content { padding: 24px 32px; overflow-y: auto; flex: 1; display: none; scroll-behavior: smooth; }
   .tab-content.active { display: block; }
 
+  /* Вкладка Инфо */
   .room-photo { width: 100%; height: 200px; background: #f8f9fa; border-radius: var(--radius); border: 2px dashed var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 16px; margin-bottom: 24px; }
   .room-features { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .feature-card { background: #f8f9fa; padding: 16px; border-radius: var(--radius); }
   .feature-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; }
   .feature-value { font-size: 18px; font-weight: 600; }
 
+  /* Вкладка Расписание */
   .schedule-list { display: flex; flex-direction: column; gap: 16px; }
-  .schedule-item { padding: 20px; border-radius: var(--radius); border-left: 6px solid var(--primary); background: #f8f9fa; }
-  .sch-time { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-  .sch-group { font-size: 18px; font-weight: 600; color: var(--primary); margin-bottom: 4px; }
-  .sch-program { font-size: 16px; margin-bottom: 4px; }
-  .sch-teacher { font-size: 14px; color: var(--text-muted); }
+  .schedule-day-group { margin-bottom: 20px; }
+  .schedule-day-title { font-size: 16px; font-weight: 700; color: var(--primary); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid #E5E5EA; }
+
+  .schedule-item { padding: 14px 16px; border-radius: 12px; border-left: 5px solid var(--border); background: #f8f9fa; transition: all 0.3s; }
+  .schedule-item.current-lesson { background: #ECFDF5; border-left-color: var(--status-free); box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.2); }
+
+  .sch-time { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
+  .badge-now { font-size: 11px; background: var(--status-free); color: white; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  .sch-group { font-size: 16px; font-weight: 600; color: var(--primary); margin-bottom: 2px; }
+  .sch-program { font-size: 14px; margin-bottom: 2px; color: #333; }
+  .sch-teacher { font-size: 13px; color: var(--text-muted); }
   .no-data { text-align: center; color: var(--text-muted); font-size: 16px; padding: 32px 0; }
 
-  /* Специально под легенду */
-  .legend-modal { max-width: 420px !important; }
-  .legend-modal .modal-title { font-size: 22px; } /* Уменьшаем заголовок, чтобы не орал */
-
-  .legend-modal-content {
-    padding: 16px 24px 32px 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: auto;
-  }
-
-  /* Чтобы SVG (или картинка) внутри не ломала окно и не распирала его */
-  .legend-modal-content svg,
-  .legend-modal-content img {
-    width: 100%;
-    max-height: 65vh;
-    height: auto;
-    object-fit: contain;
-  }
+  /* Легенда */
+  .legend-modal-content { padding: 16px 24px 32px 24px; display: flex; justify-content: center; align-items: center; overflow: auto; }
+  .legend-modal-content svg, .legend-modal-content img { width: 100%; max-height: 65vh; height: auto; object-fit: contain; }
 
   .poi-tooltip { position: absolute; background: rgba(0,0,0,0.85); color: white; padding: 8px 14px; border-radius: 8px; font-size: 14px; pointer-events: none; opacity: 0; transition: opacity 0.2s; z-index: 50; transform: translate(-50%, -100%); white-space: nowrap; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
   .poi-tooltip.show { opacity: 1; }
 
-  @keyframes pulseHighlight {
-    0% { filter: drop-shadow(0 0 0 rgba(44, 79, 167, 0.7)); }
-    50% { filter: drop-shadow(0 0 20px rgba(44, 79, 167, 0.9)); }
-    100% { filter: drop-shadow(0 0 0 rgba(44, 79, 167, 0)); }
-  }
-  .highlight-room { animation: pulseHighlight 2s infinite; }
+  /* Тост (уведомление об ошибке) */
+  #custom-toast { position: fixed; top: 24px; left: 50%; transform: translateX(-50%); background: #EF4444; color: white; padding: 12px 24px; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); z-index: 9999; font-weight: 600; font-size: 16px; opacity: 0; pointer-events: none; transition: opacity 0.3s; font-family: 'Geologica', sans-serif; }
+  #custom-toast.show { opacity: 1; }
+
+  /* Анимации */
+  .highlight-room {
+      animation: opacityPulse 0.6s infinite !important;
+    }
+  @keyframes fillPulse { 0% { fill: #FFD700 !important; } 50% { fill: #FFFFFF !important; } 100% { fill: #FFD700 !important; } }
 </style>
 </head>
 <body>
 
 <header>
   <div class="logo">Детский технопарк «Альтаир»</div>
-
-  <div class="floor-controls-wrapper">
-    <div class="segmented-control" id="floor-segmented" data-active="f1">
-      <div class="segmented-slider"></div>
-      <button class="segmented-btn active" data-floor="f1">1 этаж</button>
-      <button class="segmented-btn" data-floor="f2">2 этаж</button>
-    </div>
-    <button class="btn-both" id="btn-both">Оба этажа</button>
+  <div class="clock-widget">
+    <span class="clock-date" id="clock-date">Понедельник, 1 января</span>
+    <span class="clock-separator">|</span>
+    <span class="clock-time" id="clock-time">00:00:00</span>
   </div>
-
-  <button class="btn-legend" id="btn-legend" title="Информация">?</button>
+  </div>
 </header>
 
 <div class="map-container" id="map-container">
   <!-- ============================================================ -->
-  <!-- ВСТАВЬТЕ СЮДА СВОЙ SVG КАРТЫ                                 -->
+  <!-- ВСТАВЬТЕ СЮДА СВОЙ SVG КАРТЫ -->
   <!-- ============================================================ -->
 
 <svg width="2434" height="1227" viewBox="0 0 2434 1227" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -1318,24 +1319,45 @@
   <!-- ============================================================ -->
 </div>
 
-<div class="zoom-panel">
-  <button id="zoom-in">+</button>
-  <button id="zoom-out">−</button>
-  <button id="zoom-reset" class="reset">1:1</button>
+<!-- Левый нижний блок -->
+<div class="bottom-left">
+  <div class="ui-pill">
+    <div class="segmented-control" id="floor-segmented" data-active="f1">
+      <div class="segmented-slider"></div>
+      <button class="segmented-btn active" data-floor="f1">1 этаж</button>
+      <button class="segmented-btn" data-floor="f2">2 этаж</button>
+    </div>
+    <button class="btn-both" id="btn-both">Оба</button>
+  </div>
+
+  <div class="zoom-controls">
+    <button id="zoom-in">+</button>
+    <button id="zoom-out">−</button>
+    <button id="zoom-reset" class="reset">1:1</button>
+  </div>
 </div>
 
-<div class="search-fab-container">
+<!-- Правый нижний блок -->
+<div class="bottom-right">
   <input type="text" id="search-input" class="search-input" placeholder="Номер кабинета или группы...">
-  <button class="search-fab" id="search-fab">
+  <button class="fab-btn" id="btn-legend" title="Легенда">
+    <svg viewBox="0 0 24 24" style="width: 32px; height: 32px; stroke-width: 1.8px;">
+      <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+      <line x1="12" y1="17" x2="12.01" y2="17"></line>
+    </svg>
+  </button>
+  <button class="fab-btn search" id="search-fab">
     <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
   </button>
 </div>
 
-<button class="open-card-btn" id="open-card-btn">Показать информацию</button>
+<button class="open-card-btn" id="open-card-btn" style="display:none;">Показать информацию</button>
 
+<!-- Модальное окно аудитории -->
 <div class="modal-overlay" id="room-modal">
-  <div class="modal">
-    <div class="modal-header">
+  <div class="modal" id="room-modal-inner">
+    <div class="drag-handle" id="drag-handle"></div>
+    <div class="modal-header" id="modal-header-area">
       <div>
         <h2 class="modal-title" id="modal-title">Аудитория</h2>
         <div class="modal-subtitle" id="modal-desc">Описание</div>
@@ -1372,17 +1394,18 @@
   </div>
 </div>
 
+<!-- Модальное окно легенды -->
 <div class="modal-overlay" id="legend-modal">
-  <div class="modal legend-modal">
+  <div class="modal legend-modal" style="max-width: 420px;">
     <div class="modal-header">
-      <h2 class="modal-title">Информация</h2>
+      <h2 class="modal-title" style="font-size: 22px;">Условные обозначения</h2>
       <button class="close-btn" id="close-legend">×</button>
     </div>
     <div class="legend-modal-content">
       <!-- ============================================================ -->
-      <!-- ВСТАВЬТЕ СЮДА SVG ЛЕГЕНДЫ                                    -->
+      <!-- ВСТАВЬТЕ СЮДА SVG ЛЕГЕНДЫ -->
       <!-- ============================================================ -->
-      <svg width="291" height="493" viewBox="0 0 291 493" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="291" height="493" viewBox="0 0 291 493" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="Group 14">
 <path id="&#208;&#145;&#208;&#184;&#208;&#190;&#208;&#188;&#208;&#181;&#208;&#180;&#208;&#184;&#209;&#134;&#208;&#184;&#208;&#189;&#209;&#129;&#208;&#186;&#208;&#184;&#208;&#181; &#208;&#184; &#209;&#133;&#208;&#184;&#208;&#188;&#208;&#184;&#209;&#135;&#208;&#181;&#209;&#129;&#208;&#186;&#208;&#184;&#208;&#181; &#209;&#130;&#208;&#181;&#209;&#133;&#208;&#189;&#208;&#190;&#208;&#187;&#208;&#190;&#208;&#179;&#208;&#184;&#208;&#184;" d="M75.6 438V426.8H82.064V427.664H76.528V431.632H78.896C80.032 431.632 80.952 431.904 81.656 432.448C82.3653 432.992 82.72 433.781 82.72 434.816C82.72 435.504 82.5707 436.085 82.272 436.56C81.9733 437.029 81.5387 437.387 80.968 437.632C80.3973 437.877 79.7013 438 78.88 438H75.6ZM76.528 437.136H78.992C79.8827 437.136 80.5707 436.941 81.056 436.552C81.5467 436.157 81.792 435.589 81.792 434.848C81.792 434.128 81.544 433.557 81.048 433.136C80.552 432.709 79.872 432.496 79.008 432.496H76.528V437.136ZM84.6456 438V430.32H85.5416V436.528L90.6296 430.32H91.3496V438H90.4536V431.728L85.3176 438H84.6456ZM96.9155 438.24C96.1422 438.24 95.4488 438.056 94.8355 437.688C94.2275 437.315 93.7475 436.819 93.3955 436.2C93.0435 435.581 92.8675 434.901 92.8675 434.16C92.8675 433.605 92.9688 433.083 93.1715 432.592C93.3742 432.096 93.6568 431.661 94.0195 431.288C94.3875 430.909 94.8168 430.613 95.3075 430.4C95.7982 430.187 96.3342 430.08 96.9155 430.08C97.6888 430.08 98.3795 430.267 98.9875 430.64C99.6008 431.008 100.084 431.501 100.436 432.12C100.788 432.739 100.964 433.419 100.964 434.16C100.964 434.715 100.862 435.24 100.66 435.736C100.457 436.227 100.174 436.661 99.8115 437.04C99.4488 437.413 99.0195 437.707 98.5235 437.92C98.0328 438.133 97.4968 438.24 96.9155 438.24ZM96.9155 437.376C97.5182 437.376 98.0515 437.245 98.5155 436.984C98.9795 436.717 99.3422 436.344 99.6035 435.864C99.8702 435.384 100.004 434.816 100.004 434.16C100.004 433.504 99.8702 432.936 99.6035 432.456C99.3422 431.971 98.9795 431.597 98.5155 431.336C98.0515 431.075 97.5182 430.944 96.9155 430.944C96.3128 430.944 95.7795 431.075 95.3155 431.336C94.8515 431.597 94.4862 431.971 94.2195 432.456C93.9582 432.936 93.8275 433.504 93.8275 434.16C93.8275 434.816 93.9582 435.384 94.2195 435.864C94.4862 436.344 94.8515 436.717 95.3155 436.984C95.7795 437.245 96.3128 437.376 96.9155 437.376ZM102.483 438V430.32H103.299H103.347L107.139 435.552L106.738 435.568L110.403 430.32H111.235V438H110.339V431.584L110.499 431.664L107.235 436.224H106.499L103.139 431.648L103.282 431.568V438H102.483ZM116.831 438.24C116.031 438.24 115.325 438.072 114.711 437.736C114.098 437.395 113.618 436.92 113.271 436.312C112.925 435.704 112.751 434.997 112.751 434.192C112.751 433.605 112.85 433.061 113.047 432.56C113.245 432.059 113.522 431.624 113.879 431.256C114.237 430.883 114.653 430.595 115.127 430.392C115.607 430.184 116.127 430.08 116.687 430.08C117.279 430.08 117.807 430.187 118.271 430.4C118.741 430.608 119.13 430.901 119.439 431.28C119.754 431.659 119.983 432.101 120.127 432.608C120.271 433.115 120.314 433.664 120.255 434.256H113.743C113.711 434.88 113.821 435.427 114.071 435.896C114.322 436.36 114.693 436.723 115.183 436.984C115.674 437.245 116.261 437.376 116.943 437.376C117.354 437.376 117.762 437.304 118.167 437.16C118.578 437.011 118.927 436.8 119.215 436.528L119.735 437.28C119.474 437.499 119.181 437.68 118.855 437.824C118.53 437.968 118.194 438.072 117.847 438.136C117.506 438.205 117.167 438.24 116.831 438.24ZM113.775 433.424H119.295C119.263 432.64 119.029 432.032 118.591 431.6C118.154 431.163 117.519 430.944 116.687 430.944C115.882 430.944 115.218 431.163 114.695 431.6C114.173 432.032 113.866 432.64 113.775 433.424ZM127.588 438V431.152H123.54V432.688C123.54 433.499 123.508 434.197 123.444 434.784C123.38 435.371 123.262 435.861 123.092 436.256C122.921 436.651 122.678 436.971 122.364 437.216C122.049 437.456 121.641 437.637 121.14 437.76L120.772 437.216C121.305 437.072 121.705 436.835 121.972 436.504C122.238 436.173 122.417 435.704 122.508 435.096C122.598 434.483 122.644 433.68 122.644 432.688V430.32H128.484V438H127.588ZM120.772 440.4V437.216L121.588 437.328L121.716 437.168H130.052V440.4H129.22V438H121.604V440.4H120.772ZM131.371 438V430.32H132.267V436.528L137.355 430.32H138.075V438H137.179V431.728L132.043 438H131.371ZM140.312 438V430.32H141.208V437.168H145.912V430.32H146.809V438H140.312ZM147.865 440.4V438H146.169V437.168H148.697V440.4H147.865ZM150.004 438V430.32H150.9V436.528L155.988 430.32H156.708V438H155.812V431.728L150.676 438H150.004ZM158.946 438V430.32H159.842V433.488H164.658V430.32H165.554V438H164.658V434.32H159.842V438H158.946ZM171.186 438.24C170.381 438.24 169.669 438.064 169.05 437.712C168.432 437.355 167.946 436.869 167.594 436.256C167.248 435.643 167.074 434.944 167.074 434.16C167.074 433.563 167.178 433.016 167.386 432.52C167.594 432.024 167.888 431.595 168.266 431.232C168.65 430.864 169.101 430.581 169.618 430.384C170.136 430.181 170.701 430.08 171.314 430.08C171.773 430.08 172.194 430.139 172.578 430.256C172.962 430.368 173.325 430.549 173.666 430.8L173.122 431.536C172.893 431.344 172.616 431.197 172.29 431.096C171.965 430.995 171.618 430.944 171.25 430.944C170.594 430.944 170.026 431.072 169.546 431.328C169.066 431.579 168.693 431.944 168.426 432.424C168.165 432.899 168.034 433.472 168.034 434.144C168.034 435.152 168.322 435.944 168.898 436.52C169.474 437.091 170.253 437.376 171.234 437.376C171.65 437.376 172.037 437.301 172.394 437.152C172.757 437.003 173.037 436.821 173.234 436.608L173.842 437.296C173.453 437.589 173.037 437.821 172.594 437.992C172.152 438.157 171.682 438.24 171.186 438.24ZM180.484 438L177.78 433.856L180.036 430.32H181.028L178.772 433.824L181.604 438H180.484ZM175.236 438V430.32H176.132V433.488H178.404V434.32H176.132V438H175.236ZM182.959 438V430.32H183.855V436.528L188.943 430.32H189.663V438H188.767V431.728L183.631 438H182.959ZM195.261 438.24C194.461 438.24 193.755 438.072 193.141 437.736C192.528 437.395 192.048 436.92 191.701 436.312C191.355 435.704 191.181 434.997 191.181 434.192C191.181 433.605 191.28 433.061 191.477 432.56C191.675 432.059 191.952 431.624 192.309 431.256C192.667 430.883 193.083 430.595 193.557 430.392C194.037 430.184 194.557 430.08 195.117 430.08C195.709 430.08 196.237 430.187 196.701 430.4C197.171 430.608 197.56 430.901 197.869 431.28C198.184 431.659 198.413 432.101 198.557 432.608C198.701 433.115 198.744 433.664 198.685 434.256H192.173C192.141 434.88 192.251 435.427 192.501 435.896C192.752 436.36 193.123 436.723 193.613 436.984C194.104 437.245 194.691 437.376 195.373 437.376C195.784 437.376 196.192 437.304 196.597 437.16C197.008 437.011 197.357 436.8 197.645 436.528L198.165 437.28C197.904 437.499 197.611 437.68 197.285 437.824C196.96 437.968 196.624 438.072 196.277 438.136C195.936 438.205 195.597 438.24 195.261 438.24ZM192.205 433.424H197.725C197.693 432.64 197.459 432.032 197.021 431.6C196.584 431.163 195.949 430.944 195.117 430.944C194.312 430.944 193.648 431.163 193.125 431.6C192.603 432.032 192.296 432.64 192.205 433.424ZM75.36 453V445.32H76.256V451.528L81.344 445.32H82.064V453H81.168V446.728L76.032 453H75.36ZM86.9221 453L89.7221 449.064L87.0981 445.32H88.2341L90.2981 448.344L92.2981 445.32H93.3701L90.8421 449.016L93.6261 453H92.4741L90.2661 449.736L88.0101 453H86.9221ZM94.8106 453V445.32H95.7066V451.528L100.795 445.32H101.515V453H100.619V446.728L95.4826 453H94.8106ZM103.753 453V445.32H104.569H104.617L108.409 450.552L108.008 450.568L111.673 445.32H112.505V453H111.609V446.584L111.769 446.664L108.505 451.224H107.769L104.409 446.648L104.552 446.568V453H103.753ZM114.741 453V445.32H115.637V451.528L120.725 445.32H121.445V453H120.549V446.728L115.413 453H114.741ZM128.355 453V449.656C127.955 449.757 127.574 449.835 127.211 449.888C126.854 449.936 126.467 449.96 126.051 449.96C125.315 449.96 124.72 449.853 124.267 449.64C123.814 449.427 123.483 449.117 123.275 448.712C123.067 448.301 122.963 447.805 122.963 447.224V445.32H123.859V447.08C123.859 447.741 124.027 448.243 124.363 448.584C124.704 448.925 125.283 449.096 126.099 449.096C126.563 449.096 126.974 449.075 127.331 449.032C127.688 448.984 128.03 448.925 128.355 448.856V445.32H129.251V453H128.355ZM134.844 453.24C134.044 453.24 133.338 453.072 132.724 452.736C132.111 452.395 131.631 451.92 131.284 451.312C130.938 450.704 130.764 449.997 130.764 449.192C130.764 448.605 130.863 448.061 131.06 447.56C131.258 447.059 131.535 446.624 131.892 446.256C132.25 445.883 132.666 445.595 133.14 445.392C133.62 445.184 134.14 445.08 134.7 445.08C135.292 445.08 135.82 445.187 136.284 445.4C136.754 445.608 137.143 445.901 137.452 446.28C137.767 446.659 137.996 447.101 138.14 447.608C138.284 448.115 138.327 448.664 138.268 449.256H131.756C131.724 449.88 131.834 450.427 132.084 450.896C132.335 451.36 132.706 451.723 133.196 451.984C133.687 452.245 134.274 452.376 134.956 452.376C135.367 452.376 135.775 452.304 136.18 452.16C136.591 452.011 136.94 451.8 137.228 451.528L137.748 452.28C137.487 452.499 137.194 452.68 136.868 452.824C136.543 452.968 136.207 453.072 135.86 453.136C135.519 453.205 135.18 453.24 134.844 453.24ZM131.788 448.424H137.308C137.276 447.64 137.042 447.032 136.604 446.6C136.167 446.163 135.532 445.944 134.7 445.944C133.895 445.944 133.231 446.163 132.708 446.6C132.186 447.032 131.879 447.64 131.788 448.424ZM143.287 453.24C142.482 453.24 141.77 453.064 141.151 452.712C140.532 452.355 140.047 451.869 139.695 451.256C139.348 450.643 139.175 449.944 139.175 449.16C139.175 448.563 139.279 448.016 139.487 447.52C139.695 447.024 139.988 446.595 140.367 446.232C140.751 445.864 141.202 445.581 141.719 445.384C142.236 445.181 142.802 445.08 143.415 445.08C143.874 445.08 144.295 445.139 144.679 445.256C145.063 445.368 145.426 445.549 145.767 445.8L145.223 446.536C144.994 446.344 144.716 446.197 144.391 446.096C144.066 445.995 143.719 445.944 143.351 445.944C142.695 445.944 142.127 446.072 141.647 446.328C141.167 446.579 140.794 446.944 140.527 447.424C140.266 447.899 140.135 448.472 140.135 449.144C140.135 450.152 140.423 450.944 140.999 451.52C141.575 452.091 142.354 452.376 143.335 452.376C143.751 452.376 144.138 452.301 144.495 452.152C144.858 452.003 145.138 451.821 145.335 451.608L145.943 452.296C145.554 452.589 145.138 452.821 144.695 452.992C144.252 453.157 143.783 453.24 143.287 453.24ZM152.585 453L149.881 448.856L152.137 445.32H153.129L150.873 448.824L153.705 453H152.585ZM147.337 453V445.32H148.233V448.488H150.505V449.32H148.233V453H147.337ZM155.06 453V445.32H155.956V451.528L161.044 445.32H161.764V453H160.868V446.728L155.732 453H155.06ZM167.362 453.24C166.562 453.24 165.855 453.072 165.242 452.736C164.629 452.395 164.149 451.92 163.802 451.312C163.455 450.704 163.282 449.997 163.282 449.192C163.282 448.605 163.381 448.061 163.578 447.56C163.775 447.059 164.053 446.624 164.41 446.256C164.767 445.883 165.183 445.595 165.658 445.392C166.138 445.184 166.658 445.08 167.218 445.08C167.81 445.08 168.338 445.187 168.802 445.4C169.271 445.608 169.661 445.901 169.97 446.28C170.285 446.659 170.514 447.101 170.658 447.608C170.802 448.115 170.845 448.664 170.786 449.256H164.274C164.242 449.88 164.351 450.427 164.602 450.896C164.853 451.36 165.223 451.723 165.714 451.984C166.205 452.245 166.791 452.376 167.474 452.376C167.885 452.376 168.293 452.304 168.698 452.16C169.109 452.011 169.458 451.8 169.746 451.528L170.266 452.28C170.005 452.499 169.711 452.68 169.386 452.824C169.061 452.968 168.725 453.072 168.378 453.136C168.037 453.205 167.698 453.24 167.362 453.24ZM164.306 448.424H169.826C169.794 447.64 169.559 447.032 169.122 446.6C168.685 446.163 168.05 445.944 167.218 445.944C166.413 445.944 165.749 446.163 165.226 446.6C164.703 447.032 164.397 447.64 164.306 448.424ZM177.931 453V446.152H175.067V445.32H181.691V446.152H178.827V453H177.931ZM186.344 453.24C185.544 453.24 184.837 453.072 184.224 452.736C183.61 452.395 183.13 451.92 182.784 451.312C182.437 450.704 182.264 449.997 182.264 449.192C182.264 448.605 182.362 448.061 182.56 447.56C182.757 447.059 183.034 446.624 183.392 446.256C183.749 445.883 184.165 445.595 184.64 445.392C185.12 445.184 185.64 445.08 186.2 445.08C186.792 445.08 187.32 445.187 187.784 445.4C188.253 445.608 188.642 445.901 188.952 446.28C189.266 446.659 189.496 447.101 189.64 447.608C189.784 448.115 189.826 448.664 189.768 449.256H183.256C183.224 449.88 183.333 450.427 183.584 450.896C183.834 451.36 184.205 451.723 184.696 451.984C185.186 452.245 185.773 452.376 186.456 452.376C186.866 452.376 187.274 452.304 187.68 452.16C188.09 452.011 188.44 451.8 188.728 451.528L189.248 452.28C188.986 452.499 188.693 452.68 188.368 452.824C188.042 452.968 187.706 453.072 187.36 453.136C187.018 453.205 186.68 453.24 186.344 453.24ZM183.288 448.424H188.808C188.776 447.64 188.541 447.032 188.104 446.6C187.666 446.163 187.032 445.944 186.2 445.944C185.394 445.944 184.73 446.163 184.208 446.6C183.685 447.032 183.378 447.64 183.288 448.424ZM190.182 453L192.982 449.064L190.358 445.32H191.494L193.558 448.344L195.558 445.32H196.63L194.102 449.016L196.886 453H195.734L193.526 449.736L191.27 453H190.182ZM198.071 453V445.32H198.967V448.488H203.783V445.32H204.679V453H203.783V449.32H198.967V453H198.071ZM210.247 453.24C209.473 453.24 208.78 453.056 208.167 452.688C207.559 452.315 207.079 451.819 206.727 451.2C206.375 450.581 206.199 449.901 206.199 449.16C206.199 448.605 206.3 448.083 206.503 447.592C206.705 447.096 206.988 446.661 207.351 446.288C207.719 445.909 208.148 445.613 208.639 445.4C209.129 445.187 209.665 445.08 210.247 445.08C211.02 445.08 211.711 445.267 212.319 445.64C212.932 446.008 213.415 446.501 213.767 447.12C214.119 447.739 214.295 448.419 214.295 449.16C214.295 449.715 214.193 450.24 213.991 450.736C213.788 451.227 213.505 451.661 213.143 452.04C212.78 452.413 212.351 452.707 211.855 452.92C211.364 453.133 210.828 453.24 210.247 453.24ZM210.247 452.376C210.849 452.376 211.383 452.245 211.847 451.984C212.311 451.717 212.673 451.344 212.935 450.864C213.201 450.384 213.335 449.816 213.335 449.16C213.335 448.504 213.201 447.936 212.935 447.456C212.673 446.971 212.311 446.597 211.847 446.336C211.383 446.075 210.849 445.944 210.247 445.944C209.644 445.944 209.111 446.075 208.647 446.336C208.183 446.597 207.817 446.971 207.551 447.456C207.289 447.936 207.159 448.504 207.159 449.16C207.159 449.816 207.289 450.384 207.551 450.864C207.817 451.344 208.183 451.717 208.647 451.984C209.111 452.245 209.644 452.376 210.247 452.376ZM215.238 453.08L214.854 452.216C215.398 452.077 215.795 451.845 216.046 451.52C216.302 451.189 216.464 450.717 216.534 450.104C216.608 449.491 216.646 448.685 216.646 447.688V445.32H222.326V453H221.43V446.152H217.542V447.688C217.542 448.552 217.51 449.293 217.446 449.912C217.387 450.525 217.275 451.04 217.11 451.456C216.95 451.872 216.718 452.211 216.414 452.472C216.115 452.728 215.723 452.931 215.238 453.08ZM227.896 453.24C227.123 453.24 226.429 453.056 225.816 452.688C225.208 452.315 224.728 451.819 224.376 451.2C224.024 450.581 223.848 449.901 223.848 449.16C223.848 448.605 223.949 448.083 224.152 447.592C224.355 447.096 224.637 446.661 225 446.288C225.368 445.909 225.797 445.613 226.288 445.4C226.779 445.187 227.315 445.08 227.896 445.08C228.669 445.08 229.36 445.267 229.968 445.64C230.581 446.008 231.064 446.501 231.416 447.12C231.768 447.739 231.944 448.419 231.944 449.16C231.944 449.715 231.843 450.24 231.64 450.736C231.437 451.227 231.155 451.661 230.792 452.04C230.429 452.413 230 452.707 229.504 452.92C229.013 453.133 228.477 453.24 227.896 453.24ZM227.896 452.376C228.499 452.376 229.032 452.245 229.496 451.984C229.96 451.717 230.323 451.344 230.584 450.864C230.851 450.384 230.984 449.816 230.984 449.16C230.984 448.504 230.851 447.936 230.584 447.456C230.323 446.971 229.96 446.597 229.496 446.336C229.032 446.075 228.499 445.944 227.896 445.944C227.293 445.944 226.76 446.075 226.296 446.336C225.832 446.597 225.467 446.971 225.2 447.456C224.939 447.936 224.808 448.504 224.808 449.16C224.808 449.816 224.939 450.384 225.2 450.864C225.467 451.344 225.832 451.717 226.296 451.984C226.76 452.245 227.293 452.376 227.896 452.376ZM233.463 453V445.32H238.279V446.152H234.359V453H233.463ZM239.624 453V445.32H240.52V451.528L245.608 445.32H246.328V453H245.432V446.728L240.296 453H239.624ZM248.566 453V445.32H249.462V451.528L254.55 445.32H255.27V453H254.374V446.728L249.238 453H248.566Z" fill="black"/>
 <path id="&#208;&#158;&#208;&#177;&#209;&#137;&#208;&#184;&#208;&#181; &#208;&#176;&#209;&#131;&#208;&#180;&#208;&#184;&#209;&#130;&#208;&#190;&#209;&#128;&#208;&#184;&#208;&#184;" d="M80.704 484.24C79.8827 484.24 79.1173 484.093 78.408 483.8C77.704 483.501 77.088 483.088 76.56 482.56C76.0373 482.032 75.6293 481.413 75.336 480.704C75.0427 479.995 74.896 479.227 74.896 478.4C74.896 477.568 75.0427 476.797 75.336 476.088C75.6293 475.379 76.0373 474.76 76.56 474.232C77.088 473.704 77.704 473.293 78.408 473C79.1173 472.707 79.8827 472.56 80.704 472.56C81.52 472.56 82.28 472.709 82.984 473.008C83.688 473.307 84.304 473.723 84.832 474.256C85.36 474.789 85.7707 475.411 86.064 476.12C86.3627 476.824 86.512 477.584 86.512 478.4C86.512 479.227 86.3627 479.995 86.064 480.704C85.7707 481.413 85.36 482.032 84.832 482.56C84.304 483.088 83.688 483.501 82.984 483.8C82.28 484.093 81.52 484.24 80.704 484.24ZM80.704 483.344C81.376 483.344 82.0053 483.227 82.592 482.992C83.1787 482.757 83.6933 482.424 84.136 481.992C84.5787 481.555 84.9253 481.032 85.176 480.424C85.4267 479.816 85.552 479.141 85.552 478.4C85.552 477.408 85.3333 476.541 84.896 475.8C84.464 475.059 83.88 474.483 83.144 474.072C82.4133 473.661 81.6 473.456 80.704 473.456C80.032 473.456 79.4027 473.573 78.816 473.808C78.2293 474.043 77.7147 474.379 77.272 474.816C76.8293 475.248 76.4827 475.768 76.232 476.376C75.9813 476.979 75.856 477.653 75.856 478.4C75.856 479.392 76.072 480.259 76.504 481C76.9413 481.741 77.5253 482.317 78.256 482.728C78.992 483.139 79.808 483.344 80.704 483.344ZM91.8783 484.24C91.2329 484.24 90.6543 484.133 90.1423 483.92C89.6356 483.701 89.2036 483.381 88.8463 482.96C88.4943 482.539 88.2249 482.021 88.0383 481.408C87.8569 480.789 87.7663 480.08 87.7663 479.28C87.7663 478.405 87.8223 477.619 87.9343 476.92C88.0516 476.221 88.2409 475.613 88.5023 475.096C88.7689 474.573 89.1263 474.144 89.5743 473.808C90.0223 473.467 90.5769 473.221 91.2383 473.072L94.9183 472.24L95.1103 473.136L91.5423 473.936C90.8169 474.101 90.2543 474.371 89.8543 474.744C89.4543 475.112 89.1636 475.576 88.9823 476.136C88.8063 476.691 88.6889 477.328 88.6303 478.048C88.9663 477.456 89.4116 476.981 89.9663 476.624C90.5263 476.261 91.2009 476.08 91.9902 476.08C92.7423 476.08 93.4036 476.267 93.9743 476.64C94.5449 477.008 94.9903 477.501 95.3103 478.12C95.6356 478.739 95.7983 479.419 95.7983 480.16C95.7983 480.715 95.7049 481.24 95.5182 481.736C95.3316 482.227 95.0623 482.661 94.7103 483.04C94.3636 483.413 93.9503 483.707 93.4703 483.92C92.9956 484.133 92.4649 484.24 91.8783 484.24ZM91.8302 483.376C92.4169 483.376 92.9369 483.245 93.3903 482.984C93.8436 482.717 94.1983 482.344 94.4543 481.864C94.7103 481.384 94.8383 480.816 94.8383 480.16C94.8383 479.504 94.7103 478.936 94.4543 478.456C94.1983 477.971 93.8436 477.597 93.3903 477.336C92.9369 477.075 92.4169 476.944 91.8302 476.944C91.2436 476.944 90.7236 477.075 90.2703 477.336C89.8169 477.597 89.4623 477.971 89.2063 478.456C88.9503 478.936 88.8223 479.504 88.8223 480.16C88.8223 480.816 88.9503 481.384 89.2063 481.864C89.4623 482.344 89.8169 482.717 90.2703 482.984C90.7236 483.245 91.2436 483.376 91.8302 483.376ZM109.4 486.4V484H107.704V483.168H110.232V486.4H109.4ZM97.4 484V476.32H98.296V483.168H102.424V476.32H103.32V483.168H107.448V476.32H108.344V484H97.4ZM111.545 484V476.32H112.441V482.528L117.529 476.32H118.249V484H117.353V477.728L112.217 484H111.545ZM123.847 484.24C123.047 484.24 122.34 484.072 121.727 483.736C121.114 483.395 120.634 482.92 120.287 482.312C119.94 481.704 119.767 480.997 119.767 480.192C119.767 479.605 119.866 479.061 120.063 478.56C120.26 478.059 120.538 477.624 120.895 477.256C121.252 476.883 121.668 476.595 122.143 476.392C122.623 476.184 123.143 476.08 123.703 476.08C124.295 476.08 124.823 476.187 125.287 476.4C125.756 476.608 126.146 476.901 126.455 477.28C126.77 477.659 126.999 478.101 127.143 478.608C127.287 479.115 127.33 479.664 127.271 480.256H120.759C120.727 480.88 120.836 481.427 121.087 481.896C121.338 482.36 121.708 482.723 122.199 482.984C122.69 483.245 123.276 483.376 123.959 483.376C124.37 483.376 124.778 483.304 125.183 483.16C125.594 483.011 125.943 482.8 126.231 482.528L126.751 483.28C126.49 483.499 126.196 483.68 125.871 483.824C125.546 483.968 125.21 484.072 124.863 484.136C124.522 484.205 124.183 484.24 123.847 484.24ZM120.791 479.424H126.311C126.279 478.64 126.044 478.032 125.607 477.6C125.17 477.163 124.535 476.944 123.703 476.944C122.898 476.944 122.234 477.163 121.711 477.6C121.188 478.032 120.882 478.64 120.791 479.424ZM134.6 484.24C134.04 484.24 133.56 484.141 133.16 483.944C132.76 483.741 132.453 483.461 132.24 483.104C132.032 482.741 131.928 482.32 131.928 481.84C131.928 481.445 132.029 481.083 132.232 480.752C132.44 480.416 132.77 480.136 133.224 479.912C133.677 479.688 134.274 479.539 135.016 479.464C135.757 479.389 136.664 479.413 137.736 479.536L137.784 480.336C136.84 480.219 136.048 480.181 135.408 480.224C134.773 480.261 134.266 480.357 133.888 480.512C133.509 480.661 133.237 480.853 133.072 481.088C132.906 481.317 132.824 481.568 132.824 481.84C132.824 482.32 132.992 482.696 133.328 482.968C133.664 483.24 134.13 483.376 134.728 483.376C135.229 483.376 135.677 483.283 136.072 483.096C136.472 482.904 136.786 482.645 137.016 482.32C137.25 481.989 137.368 481.616 137.368 481.2V478.848C137.368 478.437 137.277 478.085 137.096 477.792C136.914 477.493 136.653 477.264 136.312 477.104C135.976 476.944 135.57 476.864 135.096 476.864C134.69 476.864 134.288 476.925 133.888 477.048C133.488 477.171 133.09 477.376 132.696 477.664L132.368 476.864C132.826 476.533 133.293 476.307 133.768 476.184C134.242 476.061 134.69 476 135.112 476C135.81 476 136.392 476.109 136.856 476.328C137.325 476.547 137.677 476.869 137.912 477.296C138.146 477.717 138.264 478.235 138.264 478.848V484H137.368V482.992C137.09 483.397 136.706 483.707 136.216 483.92C135.725 484.133 135.186 484.24 134.6 484.24ZM140.394 487.6C140.197 487.6 139.997 487.573 139.794 487.52C139.597 487.467 139.381 487.365 139.146 487.216L139.386 486.4C139.546 486.517 139.717 486.603 139.898 486.656C140.085 486.709 140.245 486.736 140.378 486.736C140.826 486.736 141.162 486.621 141.386 486.392C141.61 486.168 141.802 485.829 141.962 485.376L142.362 484.224L139.29 476.32H140.298L142.874 483.008L145.386 476.32H146.346L142.89 485.472C142.671 486.048 142.439 486.488 142.194 486.792C141.954 487.101 141.687 487.312 141.394 487.424C141.101 487.541 140.767 487.6 140.394 487.6ZM153.038 484V477.152H148.99V478.688C148.99 479.499 148.958 480.197 148.894 480.784C148.83 481.371 148.713 481.861 148.542 482.256C148.372 482.651 148.129 482.971 147.814 483.216C147.5 483.456 147.092 483.637 146.59 483.76L146.222 483.216C146.756 483.072 147.156 482.835 147.422 482.504C147.689 482.173 147.868 481.704 147.958 481.096C148.049 480.483 148.094 479.68 148.094 478.688V476.32H153.934V484H153.038ZM146.222 486.4V483.216L147.038 483.328L147.166 483.168H155.502V486.4H154.67V484H147.054V486.4H146.222ZM156.821 484V476.32H157.717V482.528L162.805 476.32H163.525V484H162.629V477.728L157.493 484H156.821ZM167.683 484V477.152H164.819V476.32H171.443V477.152H168.579V484H167.683ZM176.064 484.24C175.291 484.24 174.598 484.056 173.984 483.688C173.376 483.315 172.896 482.819 172.544 482.2C172.192 481.581 172.016 480.901 172.016 480.16C172.016 479.605 172.118 479.083 172.32 478.592C172.523 478.096 172.806 477.661 173.168 477.288C173.536 476.909 173.966 476.613 174.456 476.4C174.947 476.187 175.483 476.08 176.064 476.08C176.838 476.08 177.528 476.267 178.136 476.64C178.75 477.008 179.232 477.501 179.584 478.12C179.936 478.739 180.112 479.419 180.112 480.16C180.112 480.715 180.011 481.24 179.808 481.736C179.606 482.227 179.323 482.661 178.96 483.04C178.598 483.413 178.168 483.707 177.672 483.92C177.182 484.133 176.646 484.24 176.064 484.24ZM176.064 483.376C176.667 483.376 177.2 483.245 177.664 482.984C178.128 482.717 178.491 482.344 178.752 481.864C179.019 481.384 179.152 480.816 179.152 480.16C179.152 479.504 179.019 478.936 178.752 478.456C178.491 477.971 178.128 477.597 177.664 477.336C177.2 477.075 176.667 476.944 176.064 476.944C175.462 476.944 174.928 477.075 174.464 477.336C174 477.597 173.635 477.971 173.368 478.456C173.107 478.936 172.976 479.504 172.976 480.16C172.976 480.816 173.107 481.384 173.368 481.864C173.635 482.344 174 482.717 174.464 482.984C174.928 483.245 175.462 483.376 176.064 483.376ZM181.631 487.36V476.32H182.527V477.616C182.863 477.173 183.285 476.808 183.791 476.52C184.298 476.227 184.959 476.08 185.775 476.08C186.549 476.08 187.226 476.267 187.807 476.64C188.394 477.008 188.85 477.501 189.175 478.12C189.501 478.739 189.663 479.419 189.663 480.16C189.663 480.715 189.57 481.24 189.383 481.736C189.197 482.227 188.93 482.661 188.583 483.04C188.242 483.413 187.834 483.707 187.359 483.92C186.885 484.133 186.357 484.24 185.775 484.24C185.018 484.24 184.37 484.093 183.831 483.8C183.298 483.507 182.863 483.125 182.527 482.656V487.36H181.631ZM185.615 483.376C186.218 483.376 186.751 483.245 187.215 482.984C187.679 482.717 188.042 482.344 188.303 481.864C188.57 481.384 188.703 480.816 188.703 480.16C188.703 479.504 188.57 478.936 188.303 478.456C188.042 477.971 187.679 477.597 187.215 477.336C186.751 477.075 186.218 476.944 185.615 476.944C185.013 476.944 184.479 477.075 184.015 477.336C183.551 477.597 183.186 477.971 182.919 478.456C182.658 478.936 182.527 479.504 182.527 480.16C182.527 480.816 182.658 481.384 182.919 481.864C183.186 482.344 183.551 482.717 184.015 482.984C184.479 483.245 185.013 483.376 185.615 483.376ZM191.183 484V476.32H192.078V482.528L197.167 476.32H197.887V484H196.991V477.728L191.854 484H191.183ZM200.124 484V476.32H201.02V482.528L206.108 476.32H206.828V484H205.932V477.728L200.796 484H200.124Z" fill="black"/>
@@ -1505,7 +1528,6 @@
 </clipPath>
 </defs>
 </svg>
-
       <!-- ============================================================ -->
     </div>
   </div>
@@ -1516,16 +1538,16 @@
 <script id="manifest" type="application/json">
 {
   "rooms": [
-    { "id": "101", "floor": "f1", "number": "101", "walls": ["101 walls"], "type": "Лаборатория", "cluster": "ИТ", "desc": "Лаборатория ИТ-кластера" },
-    { "id": "102", "floor": "f1", "number": "102", "walls": ["102 walls"], "type": "Лаборатория", "cluster": "Радиоэлектроника", "desc": "Лаборатория радиоэлектроники" },
-    { "id": "103", "floor": "f1", "number": "103", "walls": ["103 walls"], "type": "Лаборатория", "cluster": "Радиоэлектроника", "desc": "Лаборатория радиоэлектроники" },
-    { "id": "104", "floor": "f1", "number": "104", "walls": ["104 walls"], "type": "Лаборатория", "cluster": "Радиоэлектроника", "desc": "Лаборатория радиоэлектроники" },
-    { "id": "105", "floor": "f1", "number": "105", "walls": ["105 walls"], "type": "Лаборатория", "cluster": "Радиоэлектроника", "desc": "Лаборатория радиоэлектроники" },
-    { "id": "106", "floor": "f1", "number": "106", "walls": ["106 walls"], "type": "Лаборатория", "cluster": "ИТ", "desc": "Лаборатория ИТ-кластера" },
+    { "id": "101", "floor": "f1", "number": "101", "walls": ["101 walls"], "type": "Лаборатория", "cluster": "ИТ", "desc": "Лаборатория интерактивных систем виртуальной реальности" },
+    { "id": "102", "floor": "f1", "number": "102", "walls": ["102 walls"], "type": "Лаборатория", "cluster": "Радиоэлектроника", "desc": "Лаборатория радиоволновых систем и комплексов" },
+    { "id": "103", "floor": "f1", "number": "103", "walls": ["103 walls"], "type": "Лаборатория", "cluster": "Радиоэлектроника", "desc": "Лаборатория микропроцессорных устройств" },
+    { "id": "104", "floor": "f1", "number": "104", "walls": ["104 walls"], "type": "Лаборатория", "cluster": "Радиоэлектроника", "desc": "Техностанция технологических процессов" },
+    { "id": "105", "floor": "f1", "number": "105", "walls": ["105 walls"], "type": "Лаборатория", "cluster": "Радиоэлектроника", "desc": "Лаборатория радиотехнических измерений" },
+    { "id": "106", "floor": "f1", "number": "106", "walls": ["106 walls"], "type": "Лаборатория", "cluster": "ИТ", "desc": "Лаборатория геоинформатики" },
     { "id": "107", "floor": "f1", "number": "107", "walls": ["107 walls"], "type": "Лаборатория", "cluster": "Радиоэлектроника", "desc": "Лаборатория радиоэлектроники" },
-    { "id": "108", "floor": "f1", "number": "108", "walls": ["wc men walls_3"], "type": "Лаборатория", "cluster": "Химия", "desc": "Лаборатория химии" },
-    { "id": "109", "floor": "f1", "number": "109", "walls": ["109 big walls"], "type": "Лаборатория", "cluster": "Химия", "desc": "Лаборатория химии" },
-    { "id": "110", "floor": "f1", "number": "110", "walls": ["110 walls"], "type": "Лаборатория", "cluster": "Химия", "desc": "Лаборатория химии" },
+    { "id": "108", "floor": "f1", "number": "108", "walls": ["wc men walls_3"], "type": "Лаборатория", "cluster": "Химия", "desc": "Лаборатория юных исследователей" },
+    { "id": "109", "floor": "f1", "number": "109", "walls": ["109 big walls"], "type": "Лаборатория", "cluster": "Химия", "desc": "Лаборатория биохакинга" },
+    { "id": "110", "floor": "f1", "number": "110", "walls": ["110 walls"], "type": "Лаборатория", "cluster": "Химия", "desc": "Лаборатория органической и неорганической химии" },
     { "id": "111", "floor": "f1", "number": "111", "walls": ["111 big walls "], "type": "Коворкинг", "cluster": "Общий", "desc": "Коворкинг" },
 
     { "id": "200", "floor": "f2", "number": "200", "walls": ["200 walls"], "type": "Зал", "cluster": "Общий", "desc": "Конференц-зал" },
@@ -1533,25 +1555,23 @@
     { "id": "202", "floor": "f2", "number": "202", "walls": ["202 walls"], "type": "Аудитория", "cluster": "ИТ", "desc": "Компьютерный класс" },
     { "id": "203", "floor": "f2", "number": "203", "walls": ["203 walls"], "type": "Аудитория", "cluster": "ИТ", "desc": "Компьютерный класс" },
     { "id": "204", "floor": "f2", "number": "204", "walls": ["204 walls"], "type": "Аудитория", "cluster": "ИТ", "desc": "Компьютерный класс" },
-    { "id": "205", "floor": "f2", "number": "205", "walls": ["205 walls"], "type": "Офис", "cluster": "Общий", "desc": "Администрация" },
+    { "id": "205", "floor": "f2", "number": "205", "walls": ["205 walls"], "type": "Офис", "cluster": "Общий", "desc": "Администрация Детского технопарка «Альтаир»" },
     { "id": "206", "floor": "f2", "number": "206", "walls": ["206 walls"], "type": "Аудитория", "cluster": "ИТ", "desc": "Компьютерный класс" },
     { "id": "207a", "floor": "f2", "number": "207а", "walls": ["207a walls"], "type": "Аудитория", "cluster": "ИТ", "desc": "Компьютерный класс" },
     { "id": "207b", "floor": "f2", "number": "207б", "walls": ["207b walls"], "type": "Аудитория", "cluster": "ИТ", "desc": "Компьютерный класс" },
     { "id": "207v", "floor": "f2", "number": "207в", "walls": ["207v walls"], "type": "Аудитория", "cluster": "ИТ", "desc": "Компьютерный класс" },
     { "id": "207g", "floor": "f2", "number": "207г", "walls": ["207g walls"], "type": "Аудитория", "cluster": "ИТ", "desc": "Компьютерный класс" },
-    { "id": "208", "floor": "f2", "number": "208", "walls": ["208 walls"], "type": "Офис", "cluster": "Общий", "desc": "Директор" },
-    { "id": "209", "floor": "f2", "number": "209", "walls": ["209 walls"], "type": "Офис", "cluster": "Общий", "desc": "Дирекция" },
+    { "id": "208", "floor": "f2", "number": "208", "walls": ["208 walls"], "type": "Офис", "cluster": "Общий", "desc": "Директор Детского технопарка «Альтаир»" },
+    { "id": "209", "floor": "f2", "number": "209", "walls": ["209 walls"], "type": "Офис", "cluster": "Общий", "desc": "Дирекция Детского технопарка «Альтаир»" },
     { "id": "210", "floor": "f2", "number": "210", "walls": ["210 walls"], "type": "Офис", "cluster": "Общий", "desc": "Переговорная" }
   ],
   "pois": [
     { "id": "icon security", "name": "Пост охраны" },
     { "id": "icon vending", "name": "Вендинговый аппарат" },
-    { "id": "icon doctor", "name": "Медпункт" },
-    { "id": "icon cafe", "name": "Столовая" },
+    { "id": "icon doctor", "name": "Проход к медпункту" },
+    { "id": "icon cafe", "name": "Поход к столовой" },
     { "id": "icon stair to cafe/doctor", "name": "Переход в ИТХТ" },
-
     { "id": "icon main exit", "name": "Основной выход" },
-
     { "id": "icon door f2 exit ", "name": "Эвакуационный выход" },
     { "id": "icon exit f2 right", "name": "Эвакуационный выход" },
     { "id": "icon exit f1 left labi", "name": "Эвакуационный выход" },
@@ -1563,14 +1583,12 @@
     { "id": "icon exit f1 right 107", "name": "Эвакуационный выход" },
     { "id": "icon exit f1 right 107_2", "name": "Эвакуационный выход" },
     { "id": "icon exit f1 right 107_3", "name": "Эвакуационный выход" },
-
     { "id": "icon water 200 right", "name": "Питьевая вода" },
     { "id": "icon water f2 hall right", "name": "Питьевая вода" },
     { "id": "icon water f2 hall left", "name": "Питьевая вода" },
     { "id": "icon water 200 left", "name": "Питьевая вода" },
     { "id": "icon water 105", "name": "Питьевая вода" },
     { "id": "icon water 108", "name": "Питьевая вода" },
-
     { "id": "icon wc f2 man", "name": "Мужской санузел" },
     { "id": "icon wc f2 woman", "name": "Женский санузел" }
   ]
@@ -1579,39 +1597,27 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  // --- 1. ВНЕДРЕНИЕ CSS И HTML ДЛЯ НОВЫХ ЭЛЕМЕНТОВ ---
-  const style = document.createElement('style');
-  style.textContent = `
-    /* Стили для группировки расписания по дням */
-    .schedule-day-group { margin-bottom: 24px; }
-    .schedule-day-title { font-size: 18px; font-weight: 700; color: var(--primary); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid #E5E5EA; }
+  const manifest = JSON.parse(document.getElementById('manifest').textContent);
+  const rooms = manifest.rooms;
+  const pois = manifest.pois || [];
+  let scheduleData = [];
 
-    /* Стили для кастомного уведомления (вместо alert) */
-    #custom-toast { position: fixed; top: 24px; left: 50%; transform: translateX(-50%); background: #EF4444; color: white; padding: 12px 24px; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); z-index: 9999; font-weight: 600; font-size: 16px; opacity: 0; pointer-events: none; transition: opacity 0.3s; font-family: 'Geologica', sans-serif; }
-    #custom-toast.show { opacity: 1; }
+  // --- ЧАСЫ ---
+  function updateClock() {
+    const now = new Date();
+    const days = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+    const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
 
-    /* Усиленная подсветка (мигание) комнаты при поиске */
-      .highlight-room {
-      animation: opacityPulse 0.6s infinite !important;
-    }
-    @keyframes opacityPulse {
-      0% { fill-opacity: 1; }
-      50% { fill-opacity: 0.2; }
-      100% { fill-opacity: 1; }
-    }
-    }
-    @keyframes strongPulse {
-      0% { opacity: 1; }
-      50% { opacity: 0.6; }
-      100% { opacity: 1; }
-    }
-  `;
-  document.head.appendChild(style);
+    document.getElementById('clock-date').textContent = `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]}`;
+    document.getElementById('clock-time').textContent = now.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  }
+  setInterval(updateClock, 1000);
+  updateClock();
 
+  // --- ТОСТ ---
   const toastDiv = document.createElement('div');
   toastDiv.id = 'custom-toast';
   document.body.appendChild(toastDiv);
-
   function showToast(msg) {
     toastDiv.textContent = msg;
     toastDiv.classList.add('show');
@@ -1619,84 +1625,46 @@ document.addEventListener('DOMContentLoaded', () => {
     window.toastTimer = setTimeout(() => toastDiv.classList.remove('show'), 3000);
   }
 
-  // --- 2. ОСНОВНАЯ ЛОГИКА ---
-  const manifest = JSON.parse(document.getElementById('manifest').textContent);
-  const rooms = manifest.rooms;
-  const pois = manifest.pois || [];
-
-  let scheduleData = [];
-
+  // --- ПАРСЕР CSV ---
   function parseCSV(text) {
-    const result = [];
-    let row = [];
-    let current = '';
-    let inQuotes = false;
-
+    const result = []; let row = []; let current = ''; let inQuotes = false;
     for (let i = 0; i < text.length; i++) {
-      const char = text[i];
-      const nextChar = text[i+1];
-
+      const char = text[i], nextChar = text[i+1];
       if (char === '"') {
-        if (inQuotes && nextChar === '"') {
-          current += '"';
-          i++;
-        } else {
-          inQuotes = !inQuotes;
-        }
+        if (inQuotes && nextChar === '"') { current += '"'; i++; } else { inQuotes = !inQuotes; }
       } else if (char === ',' && !inQuotes) {
-        row.push(current.trim());
-        current = '';
+        row.push(current.trim()); current = '';
       } else if ((char === '\n' || char === '\r') && !inQuotes) {
-        if (current !== '' || row.length > 0) {
-          row.push(current.trim());
-          result.push(row);
-          row = [];
-          current = '';
-        }
+        if (current !== '' || row.length > 0) { row.push(current.trim()); result.push(row); row = []; current = ''; }
         if (char === '\r' && nextChar === '\n') i++;
-      } else {
-        current += char;
-      }
+      } else { current += char; }
     }
-    if (current !== '' || row.length > 0) {
-      row.push(current.trim());
-      result.push(row);
-    }
+    if (current !== '' || row.length > 0) { row.push(current.trim()); result.push(row); }
     return result;
   }
 
   fetch('./schedule.csv')
-    .then(response => {
-      if (!response.ok) throw new Error('Файл schedule.csv не найден');
-      return response.text();
-    })
-    .then(csvText => {
-      const rows = parseCSV(csvText);
+    .then(res => res.ok ? res.text() : '')
+    .then(csv => {
+      if (!csv) return;
+      const rows = parseCSV(csv);
       for (let i = 1; i < rows.length; i++) {
         const cols = rows[i];
         if (cols.length < 6) continue;
-        const teachers = [cols[6], cols[7], cols[8]]
-          .filter(Boolean)
-          .map(t => t.replace(/,$/, '').trim())
-          .join(', ');
-
-        scheduleData.push({
-          room: cols[0], day: cols[1], start: cols[2], end: cols[3],
-          group: cols[4], program: cols[5], teachers: teachers
-        });
+        const teachers = [cols[6], cols[7], cols[8]].filter(Boolean).map(t => t.replace(/,$/, '').trim()).join(', ');
+        scheduleData.push({ room: cols[0], day: cols[1], start: cols[2], end: cols[3], group: cols[4], program: cols[5], teachers: teachers });
       }
-      console.log(`✅ Загружено ${scheduleData.length} записей расписания`);
-    })
-    .catch(err => console.warn('⚠️', err.message));
+    }).catch(e => console.warn(e));
 
+  // --- ЭЛЕМЕНТЫ ---
   const svg = document.querySelector('.map-container svg');
   const container = document.getElementById('map-container');
   const roomModal = document.getElementById('room-modal');
+  const modalInner = document.getElementById('room-modal-inner');
   const legendModal = document.getElementById('legend-modal');
   const poiTooltip = document.getElementById('poi-tooltip');
   const searchInput = document.getElementById('search-input');
   const searchFab = document.getElementById('search-fab');
-  const openCardBtn = document.getElementById('open-card-btn');
 
   let state = { floor: 'f1', zoom: 1, panX: 0, panY: 0 };
   let isPanning = false, hasDragged = false;
@@ -1709,141 +1677,90 @@ document.addEventListener('DOMContentLoaded', () => {
   if (rect132) rect132.style.display = 'none';
 
   // --- ЛОГИКА РАСПИСАНИЯ ---
-  // Сортировка: ПН (1) -> ВС (7)
   const SORT_DAYS = { 'Понедельник': 1, 'Вторник': 2, 'Среда': 3, 'Четверг': 4, 'Пятница': 5, 'Суббота': 6, 'Воскресенье': 7 };
   const DAYS_MAP = { 'Воскресенье': 0, 'Понедельник': 1, 'Вторник': 2, 'Среда': 3, 'Четверг': 4, 'Пятница': 5, 'Суббота': 6 };
 
-  function parseTimeToMinutes(timeStr) {
-    if (!timeStr) return 0;
-    const parts = timeStr.split(':');
-    return parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
-  }
+  function parseTimeToMinutes(t) { if(!t) return 0; const p = t.split(':'); return parseInt(p[0],10)*60 + parseInt(p[1],10); }
+  function formatTime(t) { return t ? t.substring(0, 5) : ''; }
 
-  function formatTime(timeStr) {
-    if (!timeStr) return '';
-    return timeStr.substring(0, 5);
-  }
-
-  function getRoomCurrentStatus(roomNumber) {
-    const now = new Date();
-    const currentDay = now.getDay();
-    const currentMinutes = now.getHours() * 60 + now.getMinutes();
-
-    const currentLessons = scheduleData.filter(item =>
-      String(item.room) === String(roomNumber) &&
-      DAYS_MAP[item.day] === currentDay
-    );
-
-    for (let lesson of currentLessons) {
-      const start = parseTimeToMinutes(lesson.start);
-      const end = parseTimeToMinutes(lesson.end);
-      if (end < start) continue;
-
-      if (currentMinutes >= start && currentMinutes < end) {
-        return { busy: true, lesson: lesson };
-      }
+  function getRoomCurrentStatus(roomNum) {
+    const now = new Date(), day = now.getDay(), mins = now.getHours() * 60 + now.getMinutes();
+    const lessons = scheduleData.filter(i => String(i.room) === String(roomNum) && DAYS_MAP[i.day] === day);
+    for (let l of lessons) {
+      const s = parseTimeToMinutes(l.start), e = parseTimeToMinutes(l.end);
+      if (e < s) continue;
+      if (mins >= s && mins < e) return { busy: true, lesson: l };
     }
     return { busy: false };
   }
 
-  function getEl(id) {
-    if (!id) return null;
-    return svg.querySelector(`[id="${id.replace(/"/g, '\\"')}"]`);
-  }
+  // --- КАРТА ---
+  function getEl(id) { return id ? svg.querySelector(`[id="${id.replace(/"/g, '\\"')}"]`) : null; }
 
   function getBounds() {
     const g1 = getEl('f1_outline') ? getEl('f1_outline').parentNode : null;
     const g2 = getEl('f2_outline') ? getEl('f2_outline').parentNode : null;
-
-    function bboxOf(g, fallback) {
-      if (!g) return fallback;
-      try {
-        const b = g.getBBox();
-        return (b.width === 0) ? fallback : { x: b.x - 40, y: b.y - 40, w: b.width + 80, h: b.height + 80 };
-      } catch (e) { return fallback; }
+    function bboxOf(g, fb) {
+      if (!g) return fb;
+      try { const b = g.getBBox(); return (b.width === 0) ? fb : { x: b.x - 40, y: b.y - 40, w: b.width + 80, h: b.height + 80 }; } catch (e) { return fb; }
     }
-
     const f1 = bboxOf(g1, { x: 1345, y: 68, w: 1086, h: 1074 });
     const f2 = bboxOf(g2, { x: 93, y: 76, w: 1086, h: 1074 });
-
-    const both = {
-      x: Math.min(f1.x, f2.x), y: Math.min(f1.y, f2.y),
-      w: Math.max(f1.x + f1.w, f2.x + f2.w) - Math.min(f1.x, f2.x),
-      h: Math.max(f1.y + f1.h, f2.y + f2.h) - Math.min(f1.y, f2.y)
-    };
-    return { f1, f2, both };
+    return { f1, f2, both: { x: Math.min(f1.x, f2.x), y: Math.min(f1.y, f2.y), w: Math.max(f1.x+f1.w, f2.x+f2.w)-Math.min(f1.x,f2.x), h: Math.max(f1.y+f1.h, f2.y+f2.h)-Math.min(f1.y,f2.y) } };
   }
 
   function updateViewBox() {
     if (!svg) return;
-    const bounds = getBounds();
-    const baseVB = bounds[state.floor];
-
+    const b = getBounds()[state.floor];
     const g1 = getEl('f1_outline') ? getEl('f1_outline').parentNode : null;
     const g2 = getEl('f2_outline') ? getEl('f2_outline').parentNode : null;
 
-    if (state.floor === 'both') {
-      if (g1) g1.style.display = ''; if (g2) g2.style.display = '';
-    } else {
-      if (g1) g1.style.display = state.floor === 'f1' ? '' : 'none';
-      if (g2) g2.style.display = state.floor === 'f2' ? '' : 'none';
-    }
+    if (state.floor === 'both') { if(g1) g1.style.display = ''; if(g2) g2.style.display = ''; }
+    else { if(g1) g1.style.display = state.floor === 'f1' ? '' : 'none'; if(g2) g2.style.display = state.floor === 'f2' ? '' : 'none'; }
 
-    const newW = baseVB.w / state.zoom;
-    const newH = baseVB.h / state.zoom;
-    const maxPanX = (baseVB.w - newW) / 2;
-    const maxPanY = (baseVB.h - newH) / 2;
-
+    const newW = b.w / state.zoom, newH = b.h / state.zoom;
+    const maxPanX = (b.w - newW) / 2, maxPanY = (b.h - newH) / 2;
     state.panX = Math.max(-maxPanX, Math.min(maxPanX, state.panX));
     state.panY = Math.max(-maxPanY, Math.min(maxPanY, state.panY));
 
-    const newX = baseVB.x + (baseVB.w - newW) / 2 + state.panX;
-    const newY = baseVB.y + (baseVB.h - newH) / 2 + state.panY;
-    svg.setAttribute('viewBox', `${newX} ${newY} ${newW} ${newH}`);
+    svg.setAttribute('viewBox', `${b.x + (b.w - newW) / 2 + state.panX} ${b.y + (b.h - newH) / 2 + state.panY} ${newW} ${newH}`);
   }
 
-  // --- КЛИКИ ---
+  // --- КЛИКИ (ДЕЛЕГИРОВАНИЕ) ---
   svg.querySelectorAll('*').forEach(el => el.style.pointerEvents = 'none');
-
-  rooms.forEach(room => {
-    (room.walls || []).forEach(wallId => {
-      const el = getEl(wallId);
-      if (el) {
-        el.style.pointerEvents = 'all';
-        el.style.cursor = 'pointer';
-        el.querySelectorAll('*').forEach(child => child.style.pointerEvents = 'all');
-        el.addEventListener('click', (e) => {
-          if (hasDragged) return;
-          e.stopPropagation();
-          openRoomModal(room);
-          resetIdleTimer(); // Сбрасываем таймер при действии
-        });
-      }
-    });
+  rooms.forEach(r => (r.walls || []).forEach(wId => {
+    const el = getEl(wId);
+    if (el) { el.style.pointerEvents = 'all'; el.style.cursor = 'pointer'; el.querySelectorAll('*').forEach(c => c.style.pointerEvents = 'all'); }
+  }));
+  pois.forEach(p => {
+    const el = getEl(p.id);
+    if (el) { el.style.pointerEvents = 'all'; el.style.cursor = 'pointer'; el.querySelectorAll('*').forEach(c => c.style.pointerEvents = 'all'); }
   });
 
-  pois.forEach(poi => {
-    const el = getEl(poi.id);
-    if (el) {
-      el.style.pointerEvents = 'all';
-      el.style.cursor = 'pointer';
-      el.querySelectorAll('*').forEach(child => child.style.pointerEvents = 'all');
-      el.addEventListener('click', (e) => {
-        if (hasDragged) return;
-        e.stopPropagation();
-        poiTooltip.textContent = poi.name;
-        poiTooltip.classList.add('show');
-        const rect = container.getBoundingClientRect();
-        poiTooltip.style.left = (e.clientX - rect.left) + 'px';
-        poiTooltip.style.top = (e.clientY - rect.top - 10) + 'px';
-        clearTimeout(window.poiTimeout);
-        window.poiTimeout = setTimeout(() => poiTooltip.classList.remove('show'), 3000);
-        resetIdleTimer();
-      });
+  container.addEventListener('click', (e) => {
+    if (hasDragged) return;
+    let target = e.target;
+    while (target && target !== container) {
+      if (target.id) {
+        const r = rooms.find(x => x.walls && x.walls.includes(target.id));
+        if (r) { e.stopPropagation(); openRoomModal(r); resetIdleTimer(); return; }
+        const p = pois.find(x => x.id === target.id);
+        if (p) {
+          e.stopPropagation();
+          poiTooltip.textContent = p.name;
+          poiTooltip.classList.add('show');
+          const rect = container.getBoundingClientRect();
+          poiTooltip.style.left = (e.clientX - rect.left) + 'px';
+          poiTooltip.style.top = (e.clientY - rect.top - 10) + 'px';
+          clearTimeout(window.poiTimeout); window.poiTimeout = setTimeout(() => poiTooltip.classList.remove('show'), 3000);
+          resetIdleTimer(); return;
+        }
+      }
+      target = target.parentNode;
     }
   });
 
-  // --- МОДАЛКА АУДИТОРИИ (С ГРУППИРОВКОЙ ПО ДНЯМ) ---
+  // --- МОДАЛКА ---
   function openRoomModal(room) {
     document.getElementById('modal-title').textContent = `Аудитория ${room.number}`;
     document.getElementById('modal-desc').textContent = room.desc;
@@ -1852,14 +1769,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const status = getRoomCurrentStatus(room.number);
     const statusEl = document.getElementById('modal-status');
-
-    if (status.busy) {
-      statusEl.className = 'status-badge busy';
-      statusEl.innerHTML = `<div class="status-dot"></div><span>Занято: ${status.lesson.group}</span>`;
-    } else {
-      statusEl.className = 'status-badge';
-      statusEl.innerHTML = `<div class="status-dot"></div><span>Свободно</span>`;
-    }
+    statusEl.className = `status-badge ${status.busy ? 'busy' : ''}`;
+    statusEl.innerHTML = `<div class="status-dot"></div><span>${status.busy ? 'Занято: ' + status.lesson.group : 'Свободно'}</span>`;
 
     const scheduleList = document.getElementById('schedule-list');
     scheduleList.innerHTML = '';
@@ -1867,53 +1778,51 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!scheduleData.length) {
       scheduleList.innerHTML = '<div class="no-data">Данные о расписании временно недоступны.</div>';
     } else {
-      const roomSchedule = scheduleData.filter(item => String(item.room) === String(room.number));
-
-      if (roomSchedule.length === 0) {
-        scheduleList.innerHTML = '<div class="no-data">На эту неделю занятий нет. Аудитория свободна.</div>';
+      const rs = scheduleData.filter(i => String(i.room) === String(room.number));
+      if (rs.length === 0) {
+        scheduleList.innerHTML = '<div class="no-data">На эту неделю занятий нет.</div>';
       } else {
-        // Сортировка от Понедельника к Воскресенью
-        roomSchedule.sort((a, b) => SORT_DAYS[a.day] - SORT_DAYS[b.day] || parseTimeToMinutes(a.start) - parseTimeToMinutes(b.start));
+        rs.sort((a, b) => SORT_DAYS[a.day] - SORT_DAYS[b.day] || parseTimeToMinutes(a.start) - parseTimeToMinutes(b.start));
+        let html = '', currentDay = '';
+        const now = new Date(), curDay = now.getDay(), curMins = now.getHours() * 60 + now.getMinutes();
 
-        let scheduleHtml = '';
-        let currentDay = '';
-
-        roomSchedule.forEach(item => {
-          // Если начался новый день, добавляем заголовок
+        rs.forEach(item => {
           if (item.day !== currentDay) {
-            if (currentDay !== '') scheduleHtml += '</div>'; // Закрываем предыдущий блок дня
-            scheduleHtml += `<div class="schedule-day-group"><div class="schedule-day-title">${item.day}</div>`;
+            if (currentDay !== '') html += '</div>';
+            html += `<div class="schedule-day-group"><div class="schedule-day-title">${item.day}</div>`;
             currentDay = item.day;
           }
 
-          const timeStr = `${formatTime(item.start)} - ${formatTime(item.end)}`;
-          scheduleHtml += `
-            <div class="schedule-item">
-              <div class="sch-time">${timeStr}</div>
+          // Проверка на "Идет сейчас"
+          const s = parseTimeToMinutes(item.start), e = parseTimeToMinutes(item.end);
+          const isCurrent = (DAYS_MAP[item.day] === curDay && curMins >= s && curMins < e && e >= s);
+
+          html += `
+            <div class="schedule-item ${isCurrent ? 'current-lesson' : ''}">
+              <div class="sch-time">${formatTime(item.start)} - ${formatTime(item.end)} ${isCurrent ? '<span class="badge-now">Идет сейчас</span>' : ''}</div>
               <div class="sch-group">${item.group}</div>
               <div class="sch-program">${item.program}</div>
               <div class="sch-teacher">${item.teachers}</div>
             </div>
           `;
         });
-
-        if (currentDay !== '') scheduleHtml += '</div>'; // Закрываем последний блок
-        scheduleList.innerHTML = scheduleHtml;
+        if (currentDay !== '') html += '</div>';
+        scheduleList.innerHTML = html;
       }
     }
 
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === 'info'));
     document.querySelectorAll('.tab-content').forEach(c => c.classList.toggle('active', c.id === 'tab-info'));
     roomModal.classList.add('active');
-    openCardBtn.classList.remove('show');
+    modalInner.style.transform = ''; // сброс свайпа
   }
 
   // --- ОБРАБОТЧИКИ ЗАКРЫТИЯ ---
-  document.getElementById('close-modal').addEventListener('click', () => { roomModal.classList.remove('active'); resetIdleTimer(); });
-  roomModal.addEventListener('click', (e) => { if (e.target === roomModal) { roomModal.classList.remove('active'); resetIdleTimer(); } });
+  document.getElementById('close-modal').addEventListener('click', () => roomModal.classList.remove('active'));
+  roomModal.addEventListener('click', (e) => { if (e.target === roomModal) roomModal.classList.remove('active'); });
   document.getElementById('btn-legend').addEventListener('click', () => { legendModal.classList.add('active'); resetIdleTimer(); });
-  document.getElementById('close-legend').addEventListener('click', () => { legendModal.classList.remove('active'); resetIdleTimer(); });
-  legendModal.addEventListener('click', (e) => { if (e.target === legendModal) { legendModal.classList.remove('active'); resetIdleTimer(); } });
+  document.getElementById('close-legend').addEventListener('click', () => legendModal.classList.remove('active'));
+  legendModal.addEventListener('click', (e) => { if (e.target === legendModal) legendModal.classList.remove('active'); });
 
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -1921,275 +1830,190 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
       btn.classList.add('active');
       document.getElementById(`tab-${btn.dataset.tab}`).classList.add('active');
-      resetIdleTimer();
     });
+  });
+
+  // --- СВАЙП ДЛЯ ЗАКРЫТИЯ (МОБИЛЬНЫЕ) ---
+  let touchStartY = 0;
+  const dragArea = document.getElementById('modal-header-area');
+
+  dragArea.addEventListener('touchstart', (e) => {
+    if (window.innerWidth > 768) return; // Только для мобилок
+    touchStartY = e.touches[0].clientY;
+    modalInner.style.transition = 'none'; // Отключаем плавность при перетаскивании
+  }, { passive: true });
+
+  dragArea.addEventListener('touchmove', (e) => {
+    if (window.innerWidth > 768) return;
+    const deltaY = e.touches[0].clientY - touchStartY;
+    if (deltaY > 0) {
+      modalInner.style.transform = `translateY(${deltaY}px)`;
+    }
+  }, { passive: true });
+
+  dragArea.addEventListener('touchend', (e) => {
+    if (window.innerWidth > 768) return;
+    const deltaY = e.changedTouches[0].clientY - touchStartY;
+    modalInner.style.transition = 'transform 0.3s cubic-bezier(0.25, 1, 0.5, 1)';
+
+    if (deltaY > 100) {
+      roomModal.classList.remove('active'); // Закрываем, если свайпнули дальше 100px
+    } else {
+      modalInner.style.transform = ''; // Возвращаем на место
+    }
   });
 
   // --- ТУМБЛЕР ЭТАЖЕЙ ---
-  const segmentedControl = document.getElementById('floor-segmented');
-  const segBtns = segmentedControl.querySelectorAll('.segmented-btn');
+  const segCtrl = document.getElementById('floor-segmented');
+  const segBtns = segCtrl.querySelectorAll('.segmented-btn');
   const btnBoth = document.getElementById('btn-both');
 
   function updateFloorUI() {
-    if (state.floor === 'f1') {
-      segmentedControl.setAttribute('data-active', 'f1');
-      segBtns[0].classList.add('active'); segBtns[1].classList.remove('active'); btnBoth.classList.remove('active');
-    } else if (state.floor === 'f2') {
-      segmentedControl.setAttribute('data-active', 'f2');
-      segBtns[0].classList.remove('active'); segBtns[1].classList.add('active'); btnBoth.classList.remove('active');
-    } else {
-      segBtns[0].classList.remove('active'); segBtns[1].classList.remove('active'); btnBoth.classList.add('active');
-    }
+    if (state.floor === 'f1') { segCtrl.setAttribute('data-active', 'f1'); segBtns[0].classList.add('active'); segBtns[1].classList.remove('active'); btnBoth.classList.remove('active'); }
+    else if (state.floor === 'f2') { segCtrl.setAttribute('data-active', 'f2'); segBtns[0].classList.remove('active'); segBtns[1].classList.add('active'); btnBoth.classList.remove('active'); }
+    else { segBtns[0].classList.remove('active'); segBtns[1].classList.remove('active'); btnBoth.classList.add('active'); }
   }
+  segBtns.forEach(b => b.addEventListener('click', () => { state.floor = b.dataset.floor; state.zoom = 1; state.panX = 0; state.panY = 0; updateFloorUI(); updateViewBox(); resetIdleTimer(); }));
+  btnBoth.addEventListener('click', () => { state.floor = 'both'; state.zoom = 1; state.panX = 0; state.panY = 0; updateFloorUI(); updateViewBox(); resetIdleTimer(); });
 
-  segBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      state.floor = btn.dataset.floor;
-      state.zoom = 1; state.panX = 0; state.panY = 0;
-      updateFloorUI(); updateViewBox();
-      resetIdleTimer();
-    });
-  });
-
-  btnBoth.addEventListener('click', () => {
-    state.floor = 'both';
-    state.zoom = 1; state.panX = 0; state.panY = 0;
-    updateFloorUI(); updateViewBox();
-    resetIdleTimer();
-  });
-
-  // --- ПОИСК (ПО АУДИТОРИИ И ПО ГРУППЕ) ---
-  searchFab.addEventListener('click', () => {
-    if (searchInput.classList.contains('open')) performSearch();
-    else { searchInput.classList.add('open'); searchInput.focus(); }
-    resetIdleTimer();
-  });
-
+  // --- ПОИСК ---
+  searchFab.addEventListener('click', () => { if (searchInput.classList.contains('open')) performSearch(); else { searchInput.classList.add('open'); searchInput.focus(); } resetIdleTimer(); });
   searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') performSearch(); });
-
     // Перехват Ctrl+F (и Cmd+F на Mac) для открытия кастомного поиска
   window.addEventListener('keydown', (e) => {
-    // Проверяем Ctrl на Windows/Linux или Cmd (Meta) на Mac
     if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'f') {
       e.preventDefault(); // Отменяем стандартный поиск браузера
       searchInput.classList.add('open');
       searchInput.focus();
-      resetIdleTimer(); // Продлеваем жизнь киоска
+      resetIdleTimer();
     }
   });
 
   function performSearch() {
-    const query = searchInput.value.trim().toLowerCase();
-    if (!query) { searchInput.classList.remove('open'); return; }
-
-    let targetRoom = rooms.find(r => r.number.toLowerCase() === query || r.id.toLowerCase() === query);
-
-    if (!targetRoom) {
-      const groupLessons = scheduleData.filter(item => item.group.toLowerCase().includes(query));
-      if (groupLessons.length > 0) {
-        const roomNum = groupLessons[0].room;
-        targetRoom = rooms.find(r => String(r.number) === String(roomNum));
-
-        if (!targetRoom) {
-          showToast(`Группа найдена, но аудитория (${roomNum}) отсутствует на карте.`);
-          return;
-        }
-      }
+    const q = searchInput.value.trim().toLowerCase();
+    if (!q) { searchInput.classList.remove('open'); return; }
+    let target = rooms.find(r => r.number.toLowerCase() === q || r.id.toLowerCase() === q);
+    if (!target) {
+      const grp = scheduleData.filter(i => i.group.toLowerCase().includes(q));
+      if (grp.length > 0) { target = rooms.find(r => String(r.number) === String(grp[0].room)); if (!target) { showToast(`Группа найдена, но ауд. (${grp[0].room}) нет на карте.`); return; } }
     }
-
-    if (targetRoom) {
-      if (currentFoundRoom) {
-        const oldEl = getEl(currentFoundRoom.walls[0]);
-        if (oldEl) oldEl.classList.remove('highlight-room');
-      }
-      currentFoundRoom = targetRoom;
-
-      if (state.floor !== targetRoom.floor) {
-        state.floor = targetRoom.floor;
-        updateFloorUI();
-      }
-
+    if (target) {
+      if (currentFoundRoom) { const o = getEl(currentFoundRoom.walls[0]); if(o) o.classList.remove('highlight-room'); }
+      currentFoundRoom = target;
+      if (state.floor !== target.floor) { state.floor = target.floor; updateFloorUI(); }
       setTimeout(() => {
-        const wallEl = getEl(targetRoom.walls[0]);
-        if (wallEl) {
-          wallEl.classList.add('highlight-room'); // Включаем мигание
+        const wall = getEl(target.walls[0]);
+        if (wall) {
+          wall.classList.add('highlight-room');
           clearTimeout(window.highlightTimer);
-          window.highlightTimer = setTimeout(() => {
-            wallEl.classList.remove('highlight-room');
-          }, 5000); // 5000 мс = 5 секунд
+          window.highlightTimer = setTimeout(() => wall.classList.remove('highlight-room'), 5000); // 5 секунд мигания
 
-          const bbox = wallEl.getBBox();
-          const bounds = getBounds();
-          const baseVB = bounds[state.floor];
-
-          state.zoom = 2.5;
-          state.panX = (bbox.x + bbox.width / 2) - (baseVB.x + baseVB.w / 2);
-          state.panY = (bbox.y + bbox.height / 2) - (baseVB.y + baseVB.h / 2);
-
+          const bbox = wall.getBBox(), b = getBounds()[state.floor];
+          state.zoom = 2.5; state.panX = (bbox.x + bbox.width/2) - (b.x + b.w/2); state.panY = (bbox.y + bbox.height/2) - (b.y + b.h/2);
           updateViewBox();
-          openCardBtn.classList.add('show');
-          searchInput.classList.remove('open');
-          searchInput.value = '';
+          document.getElementById('open-card-btn').classList.add('show');
+          searchInput.classList.remove('open'); searchInput.value = '';
         }
       }, 50);
-    } else {
-      showToast('Аудитория или группа не найдены');
-    }
+    } else { showToast('Аудитория или группа не найдены'); }
     resetIdleTimer();
   }
 
+  // Кнопка "Открыть карточку" (из поиска)
+  const openCardBtn = document.getElementById('open-card-btn');
   openCardBtn.addEventListener('click', () => {
     if (currentFoundRoom) {
       openRoomModal(currentFoundRoom);
-      const wallEl = getEl(currentFoundRoom.walls[0]);
-      if (wallEl) wallEl.classList.remove('highlight-room');
+      const w = getEl(currentFoundRoom.walls[0]); if (w) w.classList.remove('highlight-room');
     }
   });
 
-  // --- ЗУМ И ПАН (КНОПКИ) ---
+  // --- ЗУМ И ПАН ---
   document.getElementById('zoom-in').addEventListener('click', () => { if (state.zoom < 6) { state.zoom += 0.5; updateViewBox(); } resetIdleTimer(); });
   document.getElementById('zoom-out').addEventListener('click', () => { if (state.zoom > 1) { state.zoom -= 0.5; updateViewBox(); } else { state.zoom = 1; state.panX = 0; state.panY = 0; updateViewBox(); } resetIdleTimer(); });
   document.getElementById('zoom-reset').addEventListener('click', () => { state.zoom = 1; state.panX = 0; state.panY = 0; updateViewBox(); resetIdleTimer(); });
 
-  // --- ЗУМ КОЛЕСИКОМ МЫШИ (И ТАЧПАДОМ) ---
   container.addEventListener('wheel', (e) => {
-    e.preventDefault();
-    const zoomFactor = 1.1;
-    const oldZoom = state.zoom;
-
-    if (e.deltaY < 0) state.zoom = Math.min(state.zoom * zoomFactor, 6);
-    else state.zoom = Math.max(state.zoom / zoomFactor, 1);
-
+    e.preventDefault(); const oldZoom = state.zoom;
+    if (e.deltaY < 0) state.zoom = Math.min(state.zoom * 1.1, 6); else state.zoom = Math.max(state.zoom / 1.1, 1);
     if (state.zoom !== oldZoom) {
-      const rect = svg.getBoundingClientRect();
-      const mouseX = e.clientX - rect.left;
-      const mouseY = e.clientY - rect.top;
-
-      const bounds = getBounds();
-      const baseVB = bounds[state.floor];
-      const currentW = baseVB.w / oldZoom;
-      const currentH = baseVB.h / oldZoom;
-      const currentX = baseVB.x + (baseVB.w - currentW) / 2 + state.panX;
-      const currentY = baseVB.y + (baseVB.h - currentH) / 2 + state.panY;
-
-      const svgMouseX = currentX + (mouseX / rect.width) * currentW;
-      const svgMouseY = currentY + (mouseY / rect.height) * currentH;
-
-      const newW = baseVB.w / state.zoom;
-      const newH = baseVB.h / state.zoom;
-      const newBaseX = baseVB.x + (baseVB.w - newW) / 2;
-      const newBaseY = baseVB.y + (baseVB.h - newH) / 2;
-
-      state.panX += (svgMouseX - (newBaseX + (mouseX / rect.width) * newW));
-      state.panY += (svgMouseY - (newBaseY + (mouseY / rect.height) * newH));
-
+      const rect = svg.getBoundingClientRect(), mx = e.clientX - rect.left, my = e.clientY - rect.top;
+      const b = getBounds()[state.floor], w = b.w / oldZoom, h = b.h / oldZoom;
+      const cx = b.x + (b.w - w)/2 + state.panX, cy = b.y + (b.h - h)/2 + state.panY;
+      const smx = cx + (mx / rect.width) * w, smy = cy + (my / rect.height) * h;
+      const nw = b.w / state.zoom, nh = b.h / state.zoom;
+      const nbx = b.x + (b.w - nw)/2, nby = b.y + (b.h - nh)/2;
+      state.panX += (smx - (nbx + (mx / rect.width) * nw));
+      state.panY += (smy - (nby + (my / rect.height) * nh));
       updateViewBox();
     }
     resetIdleTimer();
   }, { passive: false });
 
-  // --- ПАНОРАМИРОВАНИЕ И ПИНЧ-ЗУМ (МЫШЬ, ПАЛЕЦ, СТИЛУС) ---
   container.addEventListener('pointerdown', (e) => {
-    if (e.target.closest('.zoom-panel') || e.target.closest('.search-fab-container') || e.target.closest('.open-card-btn')) return;
-
-    activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
-    hasDragged = false;
-
+    if (e.target.closest('.zoom-controls') || e.target.closest('.bottom-right') || e.target.closest('.bottom-left')) return;
+    activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY }); hasDragged = false;
     if (activePointers.size === 1) {
-      isPanning = true;
-      panStartX = e.clientX; panStartY = e.clientY;
-      panStartStateX = state.panX; panStartStateY = state.panY;
-      //container.setPointerCapture(e.pointerId);
-      if (e.pointerType === 'mouse') container.setPointerCapture(e.pointerId);
-      svg.classList.add('panning');
+      isPanning = true; panStartX = e.clientX; panStartY = e.clientY; panStartStateX = state.panX; panStartStateY = state.panY;
+      container.setPointerCapture(e.pointerId); svg.classList.add('panning');
     } else if (activePointers.size === 2) {
-      isPanning = false;
-      const ptrs = Array.from(activePointers.values());
-      initialPinchDistance = Math.hypot(ptrs[0].x - ptrs[1].x, ptrs[0].y - ptrs[1].y);
-      initialZoom = state.zoom;
+      isPanning = false; const p = Array.from(activePointers.values());
+      initialPinchDistance = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); initialZoom = state.zoom;
     }
   });
 
   container.addEventListener('pointermove', (e) => {
     if (!activePointers.has(e.pointerId)) return;
     activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
-
     if (activePointers.size === 1 && isPanning) {
-      const dx = e.clientX - panStartX;
-      const dy = e.clientY - panStartY;
-
-    if (Math.abs(dx) > 15 || Math.abs(dy) > 15) {
-        hasDragged = true;
-        poiTooltip.classList.remove('show');
-    }
-
-      const rect = svg.getBoundingClientRect();
-      const baseVB = getBounds()[state.floor];
-      state.panX = panStartStateX - dx * ((baseVB.w / state.zoom) / rect.width);
-      state.panY = panStartStateY - dy * ((baseVB.h / state.zoom) / rect.height);
+      const dx = e.clientX - panStartX, dy = e.clientY - panStartY;
+      if (Math.abs(dx) > 15 || Math.abs(dy) > 15) { hasDragged = true; poiTooltip.classList.remove('show'); }
+      const rect = svg.getBoundingClientRect(), b = getBounds()[state.floor];
+      state.panX = panStartStateX - dx * ((b.w / state.zoom) / rect.width);
+      state.panY = panStartStateY - dy * ((b.h / state.zoom) / rect.height);
       updateViewBox();
     } else if (activePointers.size === 2) {
-      hasDragged = true;
-      const ptrs = Array.from(activePointers.values());
-      const currDist = Math.hypot(ptrs[0].x - ptrs[1].x, ptrs[0].y - ptrs[1].y);
-      if (initialPinchDistance > 0) {
-        state.zoom = Math.max(1, Math.min(6, initialZoom * (currDist / initialPinchDistance)));
-        updateViewBox();
-      }
+      hasDragged = true; const p = Array.from(activePointers.values());
+      const cd = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y);
+      if (initialPinchDistance > 0) { state.zoom = Math.max(1, Math.min(6, initialZoom * (cd / initialPinchDistance))); updateViewBox(); }
     }
   });
 
   const endPointer = (e) => {
-      activePointers.delete(e.pointerId);
-      if (activePointers.size === 0) {
-        isPanning = false;
-        svg.classList.remove('panning');
+    activePointers.delete(e.pointerId);
+    if (activePointers.size === 0) {
+      isPanning = false;
+      svg.classList.remove('panning');
 
-        // Если указатель сдвинулся меньше чем на 15 пикселей — это был клик, а не драг!
-        const dx = e.clientX - panStartX;
-        const dy = e.clientY - panStartY;
-        if (Math.abs(dx) < 15 && Math.abs(dy) < 15) {
-            hasDragged = false;
-        }
-      }
+      // ВАЖНО: отпускаем захват мыши, чтобы клики работали!
+      try { container.releasePointerCapture(e.pointerId); } catch (err) {}
+
+      const dx = e.clientX - panStartX, dy = e.clientY - panStartY;
+      if (Math.abs(dx) < 15 && Math.abs(dy) < 15) hasDragged = false;
+    }
   };
   container.addEventListener('pointerup', endPointer);
   container.addEventListener('pointercancel', endPointer);
 
-  // --- 5. АВТО-СБРОС ПРИ БЕЗДЕЙСТВИИ (30 СЕКУНД) ---
+  // --- ТАЙМЕР БЕЗДЕЙСТВИЯ (30 СЕК) ---
   let idleTimer;
-
   function resetIdleTimer() {
     clearTimeout(idleTimer);
     idleTimer = setTimeout(() => {
-      // 1. Закрываем карточки и поиск
-      roomModal.classList.remove('active');
-      legendModal.classList.remove('active');
-      searchInput.classList.remove('open');
-      searchInput.value = '';
-      openCardBtn.classList.remove('show');
-      poiTooltip.classList.remove('show');
-
-      // 2. Убираем мигание
+      roomModal.classList.remove('active'); legendModal.classList.remove('active');
+      searchInput.classList.remove('open'); searchInput.value = '';
+      openCardBtn.classList.remove('show'); poiTooltip.classList.remove('show');
       document.querySelectorAll('.highlight-room').forEach(el => el.classList.remove('highlight-room'));
-
-      // 3. Возвращаем 1 этаж и 1:1
-      state.floor = 'f1';
-      state.zoom = 1; state.panX = 0; state.panY = 0;
-      updateFloorUI();
-      updateViewBox();
-    }, 30000); // 30 000 мс = 30 секунд
+      state.floor = 'f1'; state.zoom = 1; state.panX = 0; state.panY = 0;
+      updateFloorUI(); updateViewBox();
+    }, 60000);
   }
+  ['pointerdown', 'pointermove', 'wheel', 'keydown', 'touchstart'].forEach(ev => window.addEventListener(ev, resetIdleTimer, { passive: true }));
 
-  // Сбрасываем таймер при любых действиях пользователя
-  ['pointerdown', 'pointermove', 'wheel', 'keydown', 'touchstart'].forEach(evt => {
-    window.addEventListener(evt, resetIdleTimer, { passive: true });
-  });
-
-  // --- ИНИЦИАЛИЗАЦИЯ ---
+  // Инициализация
   setTimeout(updateViewBox, 100);
   window.addEventListener('resize', updateViewBox);
-  resetIdleTimer(); // Запускаем таймер при загрузке
+  resetIdleTimer();
 });
 </script>
 </body>
