@@ -1951,49 +1951,71 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { passive: false });
 
   container.addEventListener('pointerdown', (e) => {
+    // Игнорируем клики по панелям управления
     if (e.target.closest('.zoom-controls') || e.target.closest('.bottom-right') || e.target.closest('.bottom-left')) return;
-    activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY }); hasDragged = false;
+
+    activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    hasDragged = false;
+
     if (activePointers.size === 1) {
-      isPanning = true; panStartX = e.clientX; panStartY = e.clientY; panStartStateX = state.panX; panStartStateY = state.panY;
-      container.setPointerCapture(e.pointerId); svg.classList.add('panning');
+      isPanning = true;
+      panStartX = e.clientX;
+      panStartY = e.clientY;
+      panStartStateX = state.panX;
+      panStartStateY = state.panY;
+      svg.classList.add('panning');
     } else if (activePointers.size === 2) {
-      isPanning = false; const p = Array.from(activePointers.values());
-      initialPinchDistance = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); initialZoom = state.zoom;
+      isPanning = false;
+      const p = Array.from(activePointers.values());
+      initialPinchDistance = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y);
+      initialZoom = state.zoom;
     }
   });
 
   container.addEventListener('pointermove', (e) => {
     if (!activePointers.has(e.pointerId)) return;
     activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
     if (activePointers.size === 1 && isPanning) {
       const dx = e.clientX - panStartX, dy = e.clientY - panStartY;
-      if (Math.abs(dx) > 15 || Math.abs(dy) > 15) { hasDragged = true; poiTooltip.classList.remove('show'); }
+
+      if (Math.abs(dx) > 15 || Math.abs(dy) > 15) {
+        hasDragged = true;
+        poiTooltip.classList.remove('show');
+      }
+
       const rect = svg.getBoundingClientRect(), b = getBounds()[state.floor];
       state.panX = panStartStateX - dx * ((b.w / state.zoom) / rect.width);
       state.panY = panStartStateY - dy * ((b.h / state.zoom) / rect.height);
       updateViewBox();
     } else if (activePointers.size === 2) {
-      hasDragged = true; const p = Array.from(activePointers.values());
+      hasDragged = true;
+      const p = Array.from(activePointers.values());
       const cd = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y);
-      if (initialPinchDistance > 0) { state.zoom = Math.max(1, Math.min(6, initialZoom * (cd / initialPinchDistance))); updateViewBox(); }
+      if (initialPinchDistance > 0) {
+        state.zoom = Math.max(1, Math.min(6, initialZoom * (cd / initialPinchDistance)));
+        updateViewBox();
+      }
     }
   });
 
   const endPointer = (e) => {
     activePointers.delete(e.pointerId);
+
     if (activePointers.size === 0) {
       isPanning = false;
       svg.classList.remove('panning');
 
-      // ВАЖНО: отпускаем захват мыши, чтобы клики работали!
-      try { container.releasePointerCapture(e.pointerId); } catch (err) {}
-
       const dx = e.clientX - panStartX, dy = e.clientY - panStartY;
-      if (Math.abs(dx) < 15 && Math.abs(dy) < 15) hasDragged = false;
+      if (Math.abs(dx) < 15 && Math.abs(dy) < 15) {
+        hasDragged = false;
+      }
     }
   };
-  container.addEventListener('pointerup', endPointer);
-  container.addEventListener('pointercancel', endPointer);
+
+  // Вешаем на window, чтобы карта не залипала при уводе мыши за экран
+  window.addEventListener('pointerup', endPointer);
+  window.addEventListener('pointercancel', endPointer);
 
   // --- ТАЙМЕР БЕЗДЕЙСТВИЯ (30 СЕК) ---
   let idleTimer;
