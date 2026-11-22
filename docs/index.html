@@ -58,11 +58,16 @@
   .ui-pill { background: var(--surface); border-radius: 40px; box-shadow: var(--shadow); display: flex; align-items: center; padding: 6px; }
 
   /* Тумблер этажей */
-  .segmented-control { position: relative; display: flex; background: #E5E5EA; border-radius: 30px; padding: 4px; width: 180px; }
-  .segmented-slider { position: absolute; top: 4px; left: 4px; width: calc(50% - 4px); height: calc(100% - 8px); background: white; border-radius: 26px; box-shadow: 0 2px 5px rgba(0,0,0,0.15); transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1); }
-  .segmented-btn { flex: 1; position: relative; z-index: 1; background: transparent; border: none; font-size: 14px; font-weight: 600; color: #8e8e93; cursor: pointer; padding: 8px 0; border-radius: 30px; transition: color 0.2s; }
-  .segmented-btn.active { color: #1a1a1a; }
+  .segmented-control { position: relative; display: flex; background: #E5E5EA; border-radius: 30px; padding: 4px; width: 240px; }
+  .segmented-slider { position: absolute; top: 4px; left: 4px; width: calc(33.333% - 2.66px); height: calc(100% - 8px); background: white; border-radius: 26px; box-shadow: 0 2px 5px rgba(0,0,0,0.15); transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1); }
+
+  .segmented-control[data-active="f1"] .segmented-slider { transform: translateX(0); }
   .segmented-control[data-active="f2"] .segmented-slider { transform: translateX(100%); }
+  .segmented-control[data-active="both"] .segmented-slider { transform: translateX(200%); }
+
+  .segmented-btn { flex: 1; position: relative; z-index: 1; background: transparent; border: none; font-size: 14px; font-weight: 600; color: #8e8e93; cursor: pointer; padding: 8px 0; border-radius: 30px; transition: color 0.2s; text-align: center; }
+  .segmented-btn.active { color: #1a1a1a; }
+   /* .segmented-control[data-active="f2"] .segmented-slider { transform: translateX(100%); } */
 
   .btn-both { background: transparent; border: none; padding: 8px 16px; font-size: 14px; font-weight: 600; color: var(--text-muted); cursor: pointer; border-radius: 20px; transition: all 0.2s; margin-left: 6px; }
   .btn-both:hover, .btn-both.active { background: var(--primary); color: white; }
@@ -224,6 +229,13 @@
       max-height: 85dvh !important; /* dvh учитывает адресную строку браузера */
     }
   }
+  .open-card-btn {
+    position: absolute; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--primary); color: white; border: none; padding: 16px 32px; border-radius: 30px;
+    font-size: 16px; font-weight: 600; box-shadow: var(--shadow); cursor: pointer;
+    opacity: 0; pointer-events: none; transition: all 0.3s; z-index: 10;
+  }
+  .open-card-btn.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
 
   .modal-header { padding: 24px 32px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-start; position: relative; }
   .modal-title { font-size: 28px; font-weight: 700; color: var(--primary); margin: 0; }
@@ -307,9 +319,13 @@
 
   /* Анимации */
   .highlight-room {
-      animation: opacityPulse 0.6s infinite !important;
-    }
-  @keyframes fillPulse { 0% { fill: #FFD700 !important; } 50% { fill: #FFFFFF !important; } 100% { fill: #FFD700 !important; } }
+    animation: fillPulse 3.8s infinite !important;
+  }
+  @keyframes fillPulse {
+    0% { fill: #FFD700 !important; }
+    50% { fill: #FFFFFF !important; }
+    100% { fill: #FFD700 !important; }
+  }
 
     /* Лайтбокс (полноэкранное фото) */
   .lightbox {
@@ -359,6 +375,7 @@
   .lightbox-close:hover {
     background: rgba(255, 255, 255, 0.4);
   }
+
 </style>
 </head>
 <body>
@@ -1522,15 +1539,14 @@
   <!-- ============================================================ -->
 </div>
 
-<!-- Левый нижний блок -->
 <div class="bottom-left">
   <div class="ui-pill">
-    <div class="segmented-control" id="floor-segmented" data-active="f1">
+    <div class="segmented-control" id="floor-segmented" data-active="f1" style="width: 240px;">
       <div class="segmented-slider"></div>
-      <button class="segmented-btn active" data-floor="f1">1 этаж</button>
-      <button class="segmented-btn" data-floor="f2">2 этаж</button>
+      <button class="segmented-btn active" data-floor="f1">1 ЭТАЖ</button>
+      <button class="segmented-btn" data-floor="f2">2 ЭТАЖ</button>
+      <button class="segmented-btn" data-floor="both">ОБА</button>
     </div>
-    <button class="btn-both" id="btn-both">Оба</button>
   </div>
 
   <div class="zoom-controls">
@@ -1539,6 +1555,8 @@
     <button id="zoom-reset" class="reset">1:1</button>
   </div>
 </div>
+
+<button class="open-card-btn" id="open-card-btn" style="display:none;">Показать информацию</button>
 
 <!-- Правый нижний блок -->
 <div class="bottom-right">
@@ -1600,11 +1618,9 @@
 </defs>
 </svg>
 
-
 </div>
 
 
-<button class="open-card-btn" id="open-card-btn" style="display:none;">Показать информацию</button>
 
 <!-- Модальное окно аудитории -->
 <div class="modal-overlay" id="room-modal">
@@ -1815,10 +1831,10 @@
     { "id": "204", "floor": "f2", "number": "204", "walls": ["204 walls"], "type": "Аудитория", "cluster": "ИТ", "desc": "Компьютерный класс" },
     { "id": "205", "floor": "f2", "number": "205", "walls": ["205 walls"], "type": "Офис", "cluster": "Общий", "desc": "Администрация Детского технопарка «Альтаир»" },
     { "id": "206", "floor": "f2", "number": "206", "walls": ["206 walls"], "type": "Аудитория", "cluster": "ИТ", "desc": "Компьютерный класс" },
-    { "id": "207a", "floor": "f2", "number": "207а", "walls": ["207a walls"], "type": "Аудитория", "cluster": "ИТ", "desc": "Компьютерный класс" },
-    { "id": "207b", "floor": "f2", "number": "207б", "walls": ["207b walls"], "type": "Аудитория", "cluster": "ИТ", "desc": "Компьютерный класс" },
-    { "id": "207v", "floor": "f2", "number": "207в", "walls": ["207v walls"], "type": "Аудитория", "cluster": "ИТ", "desc": "Компьютерный класс" },
-    { "id": "207g", "floor": "f2", "number": "207г", "walls": ["207g walls"], "type": "Аудитория", "cluster": "ИТ", "desc": "Компьютерный класс" },
+    { "id": "207a", "floor": "f2", "number": "207а", "walls": ["207a walls"], "type": "Аудитория", "cluster": "Общий", "desc": "Компьютерный класс" },
+    { "id": "207b", "floor": "f2", "number": "207б", "walls": ["207b walls"], "type": "Аудитория", "cluster": "Общий", "desc": "Компьютерный класс" },
+    { "id": "207v", "floor": "f2", "number": "207в", "walls": ["207v walls"], "type": "Аудитория", "cluster": "Общий", "desc": "Компьютерный класс" },
+    { "id": "207g", "floor": "f2", "number": "207г", "walls": ["207g walls"], "type": "Аудитория", "cluster": "Общий", "desc": "Компьютерный класс" },
     { "id": "208", "floor": "f2", "number": "208", "walls": ["208 walls"], "type": "Офис", "cluster": "Общий", "desc": "Директор Детского технопарка «Альтаир»" },
     { "id": "209", "floor": "f2", "number": "209", "walls": ["209 walls"], "type": "Офис", "cluster": "Общий", "desc": "Дирекция Детского технопарка «Альтаир»" },
     { "id": "210", "floor": "f2", "number": "210", "walls": ["210 walls"], "type": "Офис", "cluster": "Общий", "desc": "Переговорная" }
@@ -1827,7 +1843,7 @@
     { "id": "icon security", "name": "Пост охраны" },
     { "id": "icon vending", "name": "Вендинговый аппарат" },
     { "id": "icon doctor", "name": "Проход к медпункту" },
-    { "id": "icon cafe", "name": "Поход к столовой" },
+    { "id": "icon cafe", "name": "Проход к столовой" },
     { "id": "icon stair to cafe/doctor", "name": "Переход в ИТХТ" },
     { "id": "icon main exit", "name": "Основной выход" },
     { "id": "icon door f2 exit ", "name": "Эвакуационный выход" },
@@ -2125,15 +2141,25 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- ТУМБЛЕР ЭТАЖЕЙ ---
   const segCtrl = document.getElementById('floor-segmented');
   const segBtns = segCtrl.querySelectorAll('.segmented-btn');
-  const btnBoth = document.getElementById('btn-both');
 
   function updateFloorUI() {
-    if (state.floor === 'f1') { segCtrl.setAttribute('data-active', 'f1'); segBtns[0].classList.add('active'); segBtns[1].classList.remove('active'); btnBoth.classList.remove('active'); }
-    else if (state.floor === 'f2') { segCtrl.setAttribute('data-active', 'f2'); segBtns[0].classList.remove('active'); segBtns[1].classList.add('active'); btnBoth.classList.remove('active'); }
-    else { segBtns[0].classList.remove('active'); segBtns[1].classList.remove('active'); btnBoth.classList.add('active'); }
+    segCtrl.setAttribute('data-active', state.floor);
+    segBtns.forEach(b => {
+      b.classList.toggle('active', b.dataset.floor === state.floor);
+    });
   }
-  segBtns.forEach(b => b.addEventListener('click', () => { state.floor = b.dataset.floor; state.zoom = 1; state.panX = 0; state.panY = 0; updateFloorUI(); updateViewBox(); resetIdleTimer(); }));
-  btnBoth.addEventListener('click', () => { state.floor = 'both'; state.zoom = 1; state.panX = 0; state.panY = 0; updateFloorUI(); updateViewBox(); resetIdleTimer(); });
+
+  segBtns.forEach(b => {
+    b.addEventListener('click', () => {
+      state.floor = b.dataset.floor;
+      state.zoom = 1; state.panX = 0; state.panY = 0;
+      updateFloorUI(); updateViewBox(); resetIdleTimer();
+    });
+  });
+  // Удаляй все упоминания btnBoth из кода, они больше не нужны
+
+  /*segBtns.forEach(b => b.addEventListener('click', () => { state.floor = b.dataset.floor; state.zoom = 1; state.panX = 0; state.panY = 0; updateFloorUI(); updateViewBox(); resetIdleTimer(); }));
+  btnBoth.addEventListener('click', () => { state.floor = 'both'; state.zoom = 1; state.panX = 0; state.panY = 0; updateFloorUI(); updateViewBox(); resetIdleTimer(); });*/
 
   // --- ПОИСК ---
   searchFab.addEventListener('click', () => { if (searchInput.classList.contains('open')) performSearch(); else { searchInput.classList.add('open'); searchInput.focus(); } resetIdleTimer(); });
@@ -2160,20 +2186,24 @@ document.addEventListener('DOMContentLoaded', () => {
       if (currentFoundRoom) { const o = getEl(currentFoundRoom.walls[0]); if(o) o.classList.remove('highlight-room'); }
       currentFoundRoom = target;
       if (state.floor !== target.floor) { state.floor = target.floor; updateFloorUI(); }
-      setTimeout(() => {
-        const wall = getEl(target.walls[0]);
-        if (wall) {
-          wall.classList.add('highlight-room');
-          clearTimeout(window.highlightTimer);
-          window.highlightTimer = setTimeout(() => wall.classList.remove('highlight-room'), 5000); // 5 секунд мигания
+    setTimeout(() => {
+            const wall = getEl(target.walls[0]);
+            if (wall) {
+              wall.classList.add('highlight-room');
 
-          const bbox = wall.getBBox(), b = getBounds()[state.floor];
-          state.zoom = 2.5; state.panX = (bbox.x + bbox.width/2) - (b.x + b.w/2); state.panY = (bbox.y + bbox.height/2) - (b.y + b.h/2);
-          updateViewBox();
-          document.getElementById('open-card-btn').classList.add('show');
-          searchInput.classList.remove('open'); searchInput.value = '';
-        }
-      }, 50);
+              // Убираем мерцание через 5 секунд
+              clearTimeout(window.highlightTimer);
+              window.highlightTimer = setTimeout(() => wall.classList.remove('highlight-room'), 10000);
+
+              const bbox = wall.getBBox(), b = getBounds()[state.floor];
+              state.zoom = 2.5; state.panX = (bbox.x + bbox.width/2) - (b.x + b.w/2); state.panY = (bbox.y + bbox.height/2) - (b.y + b.h/2);
+              updateViewBox();
+
+              // Показываем кнопку "Показать информацию"
+              document.getElementById('open-card-btn').classList.add('show');
+              searchInput.classList.remove('open'); searchInput.value = '';
+            }
+          }, 50);
     } else { showToast('Аудитория или группа не найдены'); }
     resetIdleTimer();
   }
@@ -2183,7 +2213,9 @@ document.addEventListener('DOMContentLoaded', () => {
   openCardBtn.addEventListener('click', () => {
     if (currentFoundRoom) {
       openRoomModal(currentFoundRoom);
-      const w = getEl(currentFoundRoom.walls[0]); if (w) w.classList.remove('highlight-room');
+      const w = getEl(currentFoundRoom.walls[0]);
+      if (w) w.classList.remove('highlight-room');
+      openCardBtn.classList.remove('show'); // Прячем кнопку после открытия карточки
     }
   });
 
